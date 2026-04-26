@@ -20,8 +20,13 @@ Cell* Player::GetCell() const       { return pCell; }
 
 void Player::SetHealth(int h)
 {
-	///TODO: Add validation (e.g. clamp to 0..MaxHealth)
-	health = h;
+	///(DONE) TODO: Add validation (e.g. clamp to 0..MaxHealth)
+	if (h > 0 && h <= 10)
+		health = h;
+	else if (h <= 0)
+		health = 0;
+	else if (h > 10)
+		health = 10;
 }
 int Player::GetHealth() const       { return health; }
 
@@ -57,7 +62,8 @@ void Player::Draw(Output* pOut) const
 {
 	color playerColor = UI.PlayerColors[playerNum];
 
-	///TODO: Call the appropriate Output function to draw the player token with playerColor
+	///(DONE) TODO: Call the appropriate Output function to draw the player token with playerColor
+	pOut->DrawPlayer(pCell->GetCellPosition(), playerNum, playerColor, currDirection);
 }
 
 void Player::ClearDrawing(Output* pOut) const
@@ -73,10 +79,92 @@ void Player::ClearDrawing(Output* pOut) const
 
 void Player::Move(Grid* pGrid, GameState* pState)
 {
-	///TODO: Implement this function
+	///(DONE) TODO: Implement this function
 	// - Execute the saved commands one by one, waiting for a mouse click between each
 	// - After all commands are executed, apply the game object effect at the final cell (if any)
 	// - Use CellPosition and Grid to handle movement and cell updates
+	if (savedCommandCount <= 0)
+		return;
+
+	for (int i = 0; i < savedCommandCount; i++)
+	{
+		Command cmd = savedCommands[i];
+
+        // rotations 
+		if (cmd == ROTATE_CLOCKWISE)
+		{
+			switch (currDirection)
+			{
+			case UP:    currDirection = RIGHT; break;
+			case RIGHT: currDirection = DOWN;  break;
+			case DOWN:  currDirection = LEFT;  break;
+			case LEFT:  currDirection = UP;    break;
+			}
+		}
+		else if (cmd == ROTATE_COUNTERCLOCKWISE)
+		{
+			switch (currDirection)
+			{
+			case UP:    currDirection = LEFT;  break;
+			case LEFT:  currDirection = DOWN;  break;
+			case DOWN:  currDirection = RIGHT; break;
+			case RIGHT: currDirection = UP;    break;
+			}
+		}
+		else
+		{
+			//Steps
+			int steps = 0;
+			Direction moveDir = currDirection;
+
+			if (cmd == MOVE_BACKWARD_ONE_STEP || cmd == MOVE_BACKWARD_TWO_STEPS || cmd == MOVE_BACKWARD_THREE_STEPS) {
+				switch (currDirection) {
+				case UP:    moveDir = DOWN;  break;
+				case LEFT:  moveDir = RIGHT;  break;
+				case DOWN:  moveDir = UP; break;
+				case RIGHT: moveDir = LEFT;    break;
+				}
+
+				if (cmd == MOVE_BACKWARD_ONE_STEP)
+					steps = 1;
+				else if (cmd == MOVE_BACKWARD_TWO_STEPS)
+					steps = 2;
+				else if (cmd == MOVE_BACKWARD_THREE_STEPS)
+					steps = 3;
+			}
+
+			else if (cmd == MOVE_FORWARD_ONE_STEP)
+				steps = 1;
+			else if (cmd == MOVE_FORWARD_TWO_STEPS)
+				steps = 2;
+			else if (cmd == MOVE_FORWARD_THREE_STEPS)
+				steps = 3;
+			else
+				steps = 0;
+
+                if (steps > 0)
+				{
+					CellPosition newPos = pCell->GetCellPosition();
+					newPos.AddCellNum(steps, moveDir);
+
+					if (newPos.IsValidCell())
+					{
+						pGrid->UpdatePlayerCell(this, newPos);
+					}
+				}
+		}
+        
+		if (i < savedCommandCount - 1)
+		{
+			int x, y;
+			pGrid->GetInput()->GetPointClicked(x, y);
+		}
+	}
+
+	// Applying game object:
+	GameObject* obj = pCell->GetGameObject();
+	if (obj)
+		obj->Apply(pGrid, pState, this);
 }
 
 void Player::AppendPlayerInfo(string& playersInfo) const

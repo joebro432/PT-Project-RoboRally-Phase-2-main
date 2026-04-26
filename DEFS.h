@@ -58,10 +58,10 @@ enum PhaseType
 
 enum Direction // Directions of the game
 {
-	UP,
-	DOWN,
-	RIGHT,
-	LEFT
+	UP, 
+	DOWN, 
+	RIGHT, 
+	LEFT 
 };
 
 ///TODO: Set the maximum number of commands a player can save per round
