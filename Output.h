@@ -15,15 +15,15 @@ private:
 
 	window* pWind;	// Pointer to the Graphics Window
 
-					// ========== Some Utility Functions (Private Functions) ==========
+	// ========== Some Utility Functions (Private Functions) ==========
 
-					///TODO: IMPLEMENT THE FOLLOWING FUNCTION
-					// Gets the X coordinate of the upper left corner of the passed cellpos
-	int GetCellStartX(const CellPosition & cellpos) const;
+	///TODO: IMPLEMENT THE FOLLOWING FUNCTION
+	// Gets the X coordinate of the upper left corner of the passed cellpos
+	int GetCellStartX(const CellPosition& cellpos) const;
 
 	///TODO: IMPLEMENT THE FOLLOWING FUNCTION
 	// Gets the Y coordinate of the upper left corner of the passed cellpos
-	int GetCellStartY(const CellPosition & cellpos) const;
+	int GetCellStartY(const CellPosition& cellpos) const;
 
 
 	// A helper function to draw a triangle with a certain color given its center, height, width, and direction
@@ -37,7 +37,7 @@ private:
 
 	void ClearToolBar() const;	// Clears the toolbar by drawing a filled rectangle
 
-								// Draws the saved commands in the commands bar during the play mode
+	// Draws the saved commands in the commands bar during the play mode
 	void DrawSavedCommands(Command savedCommands[], int savedCommandsCount, string CommandItemImages[]) const;
 	// Draws the available commands in the commands bar during the play mode
 	void DrawAvailableCommands(Command availableCommands[], int availableCommandsCount, string CommandItemImages[]) const;
@@ -49,31 +49,31 @@ public:
 
 	Input* CreateInput() const;	// Creates a pointer to the Input object	
 
-								// ========== User Interface Functions ==========
+	// ========== User Interface Functions ==========
 
 	void ClearStatusBar() const;	// Clears the status bar by drawing a filled rectangle
 	void ClearCommandsBar() const;	// Clears the Commands bar by drawing a filled rectangle
 	void ClearGridArea() const;	    // Draws an empty grid (horizontal and vertical lines with empty cells)
 
-									///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION
+	///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION
 	void CreateDesignModeToolBar() const;	// Creates the Design mode toolbar with all its menu icons
 
-											///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION
+	///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION
 	void CreatePlayModeToolBar() const;		// Creates the Play mode toolbar with all its menu icons
 
 	void CreateCommandsBar(Command savedCommands[], int savedCommandsCount, Command availableCommands[], int availableCommandsCount) const;
 
 	void PrintMessage(string msg) const;	// Prints a message on Status bar
 
-											///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION
+	///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION
 	void PrintPlayersInfo(string info);		// Prints players' info on the right-side of the toolbar
 
-											// ========== Game Drawing Functions ==========
+	// ========== Game Drawing Functions ==========
 
-											///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION	
-											// Draws "Cell Rectangle" with "Cell Number"
-											// the cell rectangle's color is cellColor
-	void DrawCell(const CellPosition & cellpos, color cellColor = UI.CellColor) const;
+	///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION	
+	// Draws "Cell Rectangle" with "Cell Number"
+	// the cell rectangle's color is cellColor
+	void DrawCell(const CellPosition& cellpos, color cellColor = UI.CellColor) const;
 
 	///TODO: COMPLETE THE IMPLEMENTATIN OF THE FOLLOWING FUNCTION	
 	// Draws "Player Triangle" filled with the passed color
@@ -81,7 +81,7 @@ public:
 	//	** Players' Triangle Locations depending on "playerNum" is as follows: **
 	//	Player_0
 	//	Player_1
-	void DrawPlayer(const CellPosition & cellpos, int playerNum, color playerColor, Direction direction) const;
+	void DrawPlayer(const CellPosition& cellpos, int playerNum, color playerColor, Direction direction) const;
 
 	// TODO: Complete the implementation of the following function
 	// Draws a belt from start cell to end cell (start < end)

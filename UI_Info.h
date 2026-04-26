@@ -23,7 +23,23 @@ enum DESIGN_MODE_ITEMS // The items of the Design Mode (you should add more item
 	// Note: Items MUST be ordered here as they appear in menu
 	// If you want to change the menu items order, change the order here
 
+
+
 	ITM_SET_FLAG_CELL,
+	///(DONE) TODO: Add more items names here
+	ITM_ADD_ANTENA,
+	ITM_ADD_BELT,
+	ITM_ADD_WATERPIT,
+	ITM_ADD_DANGERZONE,
+	ITM_ADD_WORKSHOP,
+	ITM_ADD_ROTATING_GEAR,
+	ITM_COPY_OBJECT,
+	ITM_CUT_OBJECT,
+	ITM_PASTE_OBJECT,
+	ITM_DELETE_OBJECT,
+	ITM_SAVE_GRID,
+	ITM_LOAD_GRID,
+
 	ITM_EXIT,
 	ITM_SWITCH_TO_PLAY_MODE,
 
@@ -37,10 +53,13 @@ enum PLAY_MODE_ITEMS // The items of the Play Mode (you should add more items)
 	// Note: Items are ordered here as they appear in menu
 	// If you want to change the menu items order, change the order here
 
-	ITM_EXECUTE_COMMANDS,
 	ITM_SELECT_COMMAND,
-	ITM_SWITCH_TO_DESIGN_MODE,
+	ITM_EXECUTE_COMMANDS,
+	ITM_Reboot_Repair,
+	ITM_New_Game,
 
+	ITM_SWITCH_TO_DESIGN_MODE,
+	ITM_Exit,
 	///TODO: Add more items names here
 
 	PLAY_ITM_COUNT		// no. of items ==> This should be the last line in this enum
@@ -91,7 +110,7 @@ struct UI_Info	// User Interface Info.
 	int SpaceBetweenCommandsSlots; // Space between the slots of the saved commands in the commands bar
 	int AvailableCommandsXOffset;	// Size of the horizontal space before drawing the available commands
 	int AvailableCommandsYOffset;	// Size of the vertical space between the start of the command bar and the cards of available commands
-									// will be used in detecting selected command from the user click
+	// will be used in detecting selected command from the user click
 	int BeltXOffset;			// Size of the horizontal space before drawing the belt
 	int BeltYOffset;			// Size of the vertical space before drawing the belt
 	int BeltLineWidth;			// Width of the belt line
@@ -105,7 +124,7 @@ struct UI_Info	// User Interface Info.
 	int CommandItemsCount;		// Number of commands the player can use
 	int AvailableCommandsCount;	// Number of available commands the player can select from
 
-								///TODO: Add more members if needed
+	///TODO: Add more members if needed
 
 } UI;	// create a global object UI
 
