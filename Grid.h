@@ -66,7 +66,7 @@ public:
 	// Returns the Cell where all players start (bottom-left corner of the board).
 	// Called by GameState's constructor to initialise player positions.
 	Cell* GetStartCell() const;
-
+	Cell* GetCell(const CellPosition& pos) const;
 	///TODO: Add any additional board-query getters here (e.g. GetCell(CellPosition))
 
 	// ========== User Interface ==========

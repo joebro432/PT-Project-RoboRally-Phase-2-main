@@ -82,7 +82,13 @@ Cell* Grid::GetStartCell() const
 	return CellList[NumVerticalCells - 1][0];
 }
 
-
+Cell* Grid::GetCell(const CellPosition& pos) const
+{
+	if (pos.IsValidCell()) {
+		return CellList[pos.VCell()][pos.HCell()];
+	}
+	return nullptr;
+}
 // ========== User Interface ==========
 
 

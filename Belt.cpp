@@ -40,7 +40,6 @@ void Belt::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 	CellPosition currentPos = pPlayer->GetPosition();
 
 	// Move player to the end position of the belt
-	// Using UpdatePlayerCell or MovePlayerToCell (depending on what Grid has)
 	pGrid->UpdatePlayerCell(pPlayer, endCellPos);
 
 	// Clear status bar after move
