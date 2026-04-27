@@ -34,7 +34,7 @@ void AddFlagAction::ReadActionParameters()
 			valid = false;
 		}
 		else if (flagPos.GetCellNum() == 1 || flagPos.GetCellNum() == 55) {
-			pGrid->PrintErrorMessage("Can't place flag at postion less than 1 or more than 55. Try again !");
+			pGrid->PrintErrorMessage("Cannot place gear on 1 or 55 cell! Try again !");
 			valid = false;
 		}
 	}

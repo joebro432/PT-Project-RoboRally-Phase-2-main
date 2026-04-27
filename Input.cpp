@@ -20,7 +20,7 @@ void Input::GetPointClicked(int& x, int& y) const
 
 ////////////////////////////////////////////////////////////////////////////////////////// 
 
-string Input::GetSrting(Output* pO) const
+string Input::GetString(Output* pO) const
 {
 	string Label;
 	char Key;
@@ -45,7 +45,7 @@ string Input::GetSrting(Output* pO) const
 int Input::GetInteger(Output* pO) const
 {
 	pO->PrintMessage("Please enter an integer: ");
-	string s = GetSrting(pO);
+	string s = GetString(pO);
 	int x = stoi(s);
 	return x;  //DONE
 	///TODO: implement the GetInteger function as described in Input.h file 
