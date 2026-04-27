@@ -35,8 +35,7 @@ void Belt::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 
 
 	// 2- Apply the belt's effect by moving the player to the endCellPos
-	//    Review the "pGrid" functions and decide which function can be used for that
-	Cell* pEndCell = pGrid->GetCell(endCellPos); //get destination of player 
+	//    Review the "pGrid" functions and decide which function can be used for thatr 
 
 	// Move player to the end position of the belt
 	pGrid->UpdatePlayerCell(pPlayer, endCellPos);
