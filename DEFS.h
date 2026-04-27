@@ -25,20 +25,37 @@ enum ActionType // The actions supported (add more as needed)
 	//  [1] Actions of Design Mode
 	SET_FLAG_CELL,	// Set Flag on a Cell
 	EXIT,			// Exit Application
-	TO_PLAY_MODE,	// Go to Play Mode  --> handled by SwitchToPlayModeAction
+	TO_PLAY_MODE,	//Go to play mode--> handled by SwitchToPlayModeAction
+	ADD_ANTENNA,
 	ADD_BELT,
-	ADD_ROTATINGGEAR,
-	ADD_FLAG,
-	///TODO: Add more action types of Design Mode
+	ADD_DANGER_ZONE,
+	ADD_WATER_PITS,
+	ADD_WORKSHOP,
+	ADD_ROTATING_GEAR,
+	CUT_GAME_OBJECT,
+	COPY_GAME_OBJECT,
+	PASTE_GAME_OBJECT,
+	DELETE_GAME_OBJECT,
+	SAVE_GRID,
+	LOAD_GRID,
+
+
+
+
+	///TODO: Add more action types of Design Mode  //DONE
 
 	//  [2] Actions of Play Mode
 
 	EXECUTE_COMMANDS,	// Execute the saved commands
 	SELECT_COMMAND,		// Select a command from the available ones to be executed
 
-	TO_DESIGN_MODE,	// Go to Design Mode  --> handled by SwitchToDesignModeAction
+	REBOOT_AND_REPAIR,		//restore some health points
+	NEW_GAME, 			//Restarts the game
+	EXIT_PLAY,
 
-	///TODO: Add more action types of Play Mode
+	TO_DESIGN_MODE,	// Go to Design Mode
+
+	///TODO: Add more action types of Play Mode  //DONE
 
 	//  [3] Others
 
