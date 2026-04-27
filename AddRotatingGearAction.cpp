@@ -13,6 +13,7 @@ void AddRotatingGearAction::ReadActionParameters()
 
 	// 1- Get a Pointer to the Input / Output Interfaces
 
+
 	// 2- Read the gearPos
 	// 3- Read whether the direction will be clockwise or not
 

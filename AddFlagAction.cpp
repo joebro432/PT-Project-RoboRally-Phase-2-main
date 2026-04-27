@@ -33,6 +33,10 @@ void AddFlagAction::ReadActionParameters()
 			pGrid->PrintErrorMessage("Invalid cell clicked. Try Again !");
 			valid = false;
 		}
+		else if (flagPos.GetCellNum() == 1 || flagPos.GetCellNum() == 55) {
+			pGrid->PrintErrorMessage("Can't place flag at postion less than 1 or more than 55. Try again !");
+			valid = false;
+		}
 	}
 	// 5- Clear status bar
 	pOut->ClearStatusBar();
