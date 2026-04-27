@@ -15,6 +15,7 @@ public:
 	virtual void ReadActionParameters(); // No parameters needed for a mode switch
 
 	virtual void Execute(); // Performs the switch to Design Mode
+	 
 
 	virtual ~SwitchToDesignModeAction();
 };
