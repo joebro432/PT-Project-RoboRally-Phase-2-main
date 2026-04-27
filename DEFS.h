@@ -28,6 +28,7 @@ enum ActionType // The actions supported (add more as needed)
 	TO_PLAY_MODE,	//Go to play mode--> handled by SwitchToPlayModeAction
 	ADD_ANTENNA,
 	ADD_BELT,
+	ADD_FLAG,
 	ADD_DANGER_ZONE,
 	ADD_WATER_PITS,
 	ADD_WORKSHOP,
@@ -69,8 +70,10 @@ enum ActionType // The actions supported (add more as needed)
 enum PhaseType
 {
 	PHASE_MOVEMENT,  // players execute their saved commands
-
 	///TODO: Add more phases here as needed
+
+	PHASE_PLANNING,   // players select commands to save for the next round
+	
 };
 
 enum Direction // Directions of the game

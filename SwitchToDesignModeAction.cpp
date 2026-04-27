@@ -25,7 +25,12 @@ void SwitchToDesignModeAction::Execute()
 	// 3. Update the full interface so the grid is redrawn
 	pManager->UpdateInterface();
 
+
 	///TODO: Add any cleanup needed when leaving Play Mode.
+	GameState* pState = pManager->GetGameState();
+	pState->SetCurrentPhase(PHASE_PLANNING); // Reset the phase to the default for the next time we enter Play Mode
+	
+	
 }
 
 SwitchToDesignModeAction::~SwitchToDesignModeAction()
