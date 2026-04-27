@@ -12,16 +12,37 @@ void AddBeltAction::ReadActionParameters()
 	Grid* pGrid = pManager->GetGrid();
 	Output* pOut = pGrid->GetOutput();
 	Input* pIn = pGrid->GetInput();
+	bool valid = false;
+	while (!valid) {
+		// Read the startPos parameter
+		pOut->PrintMessage("New Belt: Click on its Start Cell ...");
+		startPos = pIn->GetCellClicked();
 
-	// Read the startPos parameter
-	pOut->PrintMessage("New Belt: Click on its Start Cell ...");
-	startPos = pIn->GetCellClicked();
+		// Read the endPos parameter
+		pOut->PrintMessage("New Belt: Click on its End Cell ...");
+		endPos = pIn->GetCellClicked();
+		valid = true;
 
-	// Read the endPos parameter
-	pOut->PrintMessage("New Belt: Click on its End Cell ...");
-	endPos = pIn->GetCellClicked();
+		if (startPos.VCell() == endPos.VCell() && 
+			startPos.HCell()==endPos.HCell() ) {
+			pGrid->PrintErrorMessage("Same cell. Try Again !");
+			valid = false;
+		}
+		else if(startPos.VCell() != endPos.VCell() &&
+			startPos.HCell() != endPos.HCell())
+		{
+			pGrid->PrintErrorMessage("Don't allow diagonal belts. Try again !");
+			valid = false;
+		
+		
+		}
+		else if (startPos.GetCellNum() == 1 || startPos.GetCellNum() == 55 ||
+			endPos.GetCellNum() == 1 || endPos.GetCellNum() == 55) {
+			pGrid->PrintErrorMessage("Can't use cells 1 or 55 . Try again !");
+			valid = false;
 
-
+		}
+	}
 
 	///TODO: Make the needed validations on the read parameters
 
