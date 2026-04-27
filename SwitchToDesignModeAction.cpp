@@ -24,7 +24,7 @@ void SwitchToDesignModeAction::Execute()
 
 	// 3. Update the full interface so the grid is redrawn
 	pManager->UpdateInterface();
-
+	cout << "Hello";
 	///TODO: Add any cleanup needed when leaving Play Mode.
 }
 
