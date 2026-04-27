@@ -76,7 +76,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddBeltAction(this);
 		break;
 
-	case ADD_ROTATINGGEAR:
+	case ADD_ROTATING_GEAR:
 		pAct = new AddRotatingGearAction(this);
 		break;
 

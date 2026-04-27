@@ -68,11 +68,18 @@ void Player::Draw(Output* pOut) const
 
 void Player::ClearDrawing(Output* pOut) const
 {
-	///TODO: Determine the correct background colour for this cell
+	/// (DONE) TODO: Determine the correct background colour for this cell
 	//       (hint: may differ from UI.CellColor if cell is a WaterPit or DangerZone)
 	color cellColor = UI.CellColor;
+	if(pCell->HasWaterPit())
+		cellColor = UI.WaterPitsCellColor;
+	else if (pCell->HasDangerZone())
+		cellColor = UI.DangerZoneCellColor;
+	
 
-	///TODO: Call the appropriate Output function to draw the token using cellColor (erases it)
+
+	///(DONE) TODO: Call the appropriate Output function to draw the token using cellColor (erases it)
+	pOut->DrawPlayer(pCell->GetCellPosition(), playerNum, cellColor, currDirection);
 }
 
 // ====== Game Logic ======
@@ -111,6 +118,7 @@ void Player::Move(Grid* pGrid, GameState* pState)
 			case RIGHT: currDirection = UP;    break;
 			}
 		}
+		else if (cmd == NO_COMMAND) break;
 		else
 		{
 			//Steps
@@ -142,16 +150,16 @@ void Player::Move(Grid* pGrid, GameState* pState)
 			else
 				steps = 0;
 
-                if (steps > 0)
-				{
-					CellPosition newPos = pCell->GetCellPosition();
-					newPos.AddCellNum(steps, moveDir);
+        if (steps > 0)
+			{
+				CellPosition newPos = pCell->GetCellPosition();
+				newPos.AddCellNum(steps, moveDir);
 
-					if (newPos.IsValidCell())
-					{
-						pGrid->UpdatePlayerCell(this, newPos);
-					}
+				if (newPos.IsValidCell())
+				{
+					pGrid->UpdatePlayerCell(this, newPos);
 				}
+			}
 		}
         
 		if (i < savedCommandCount - 1)
@@ -169,8 +177,17 @@ void Player::Move(Grid* pGrid, GameState* pState)
 
 void Player::AppendPlayerInfo(string& playersInfo) const
 {
-	// TODO: Modify the Info as needed
+	// (DONE) TODO: Modify the Info as needed
 	playersInfo += "P" + to_string(playerNum) + "(";
-	playersInfo += to_string(currDirection) + ", ";
+	string Strdir;
+		switch (currDirection) // Switching Direction to string
+		{
+		case UP: Strdir = "UP"; break;
+		case DOWN: Strdir = "DOWN"; break;
+		case RIGHT: Strdir = "RIGHT"; break;
+		case LEFT: Strdir =  "LEFT"; break;
+		default: Strdir = "UNKNOWN"; break;
+		}
+	playersInfo += Strdir + ", ";
 	playersInfo += to_string(health) + ")";
 }
