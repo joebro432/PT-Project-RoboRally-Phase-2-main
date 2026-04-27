@@ -193,6 +193,7 @@
     <ClCompile Include="AddRotatingGearAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="DeleteGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -316,5 +317,6 @@
     <ClInclude Include="AddRotatingGearAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
+    <ClInclude Include="DeleteGameObject.h" />
   </ItemGroup>
 </Project>
