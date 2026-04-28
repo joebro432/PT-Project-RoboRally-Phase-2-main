@@ -47,7 +47,7 @@ public:
 	void      SetDirection(Direction d);
 
 	///TODO: Add more setters/getters here as needed
-
+	int getSavedCommandCount() const;
 	// ====== Saved Commands ======
 
 	void    AddSavedCommand(Command cmd);         // Appends cmd to savedCommands (called by SelectCommandAction)
