@@ -7,9 +7,22 @@
 
 Belt::Belt(const CellPosition & startCellPos, const CellPosition & endCellPos) : GameObject(startCellPos)
 {
-	this->endCellPos = endCellPos;
 
-	///TODO: Do the needed validation
+	if (startCellPos.VCell() != endCellPos.VCell() &&
+		startCellPos.HCell() != endCellPos.HCell()) {
+		// Diagonal belt so belt does nothing
+		this->endCellPos = startCellPos;
+	}
+	// Check if start and end are the same cell
+	else if (startCellPos.GetCellNum() == endCellPos.GetCellNum()) {
+		// Same cell belt does nothing
+		this->endCellPos = startCellPos;
+	}
+	else {
+		// Valid belt
+		this->endCellPos = endCellPos;
+	}
+	///TODO: Do the needed validation DONE 
 }
 void Belt::Draw(Output* pOut) const
 {
