@@ -177,12 +177,15 @@
     <ClCompile Include="DeleteGameObject.cpp" />
     <ClCompile Include="Flag.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Output.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RotatingGear.cpp" />
+    <ClCompile Include="SwitchToDesignModeAction.cpp" />
+    <ClCompile Include="SwitchToPlayModeAction.cpp" />
     <ClCompile Include="WaterPit.cpp" />
     <ClCompile Include="Workshop.cpp" />
   </ItemGroup>
@@ -221,11 +224,14 @@
     <ClInclude Include="DeleteGameObject.h" />
     <ClInclude Include="Flag.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Output.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RotatingGear.h" />
+    <ClInclude Include="SwitchToDesignModeAction.h" />
+    <ClInclude Include="SwitchToPlayModeAction.h" />
     <ClInclude Include="UI_Info.h" />
     <ClInclude Include="WaterPit.h" />
     <ClInclude Include="Workshop.h" />
