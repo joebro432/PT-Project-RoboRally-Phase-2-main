@@ -77,7 +77,7 @@ bool RotatingGear::GetisClockWise() const
 RotatingGear::~RotatingGear()
 {
 }
-void RotatingGear::Save(ofstream& OutFile, int type)
+void RotatingGear::Save(ofstream& OutFile)
 {
 	// Save cell number and direction (1 for clockwise, 0 for counter-clockwise)
 	OutFile << position.GetCellNum() << " ";

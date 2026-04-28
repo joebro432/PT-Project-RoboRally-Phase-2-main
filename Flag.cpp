@@ -39,7 +39,7 @@ Flag::~Flag()
 {
 
 }
-void Flag::Save(ofstream& OutFile, int type)
+void Flag::Save(ofstream& OutFile)
 {
 	// Save the cell number of the flag
 	OutFile << position.GetCellNum() << " ";
