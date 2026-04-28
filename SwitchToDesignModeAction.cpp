@@ -1,6 +1,7 @@
 #include "SwitchToDesignModeAction.h"
 #include "Grid.h"
 #include "Output.h"
+#include "GameState.h"
 
 SwitchToDesignModeAction::SwitchToDesignModeAction(ApplicationManager* pApp) : Action(pApp)
 {
