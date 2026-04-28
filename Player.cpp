@@ -92,7 +92,7 @@ void Player::Move(Grid* pGrid, GameState* pState)
 	// - Use CellPosition and Grid to handle movement and cell updates
 	if (savedCommandCount <= 0)
 		return;
-
+	pState->SetCurrentPhase(PHASE_MOVEMENT); // El player beyt7ark
 	for (int i = 0; i < savedCommandCount; i++)
 	{
 		Command cmd = savedCommands[i];
@@ -162,14 +162,18 @@ void Player::Move(Grid* pGrid, GameState* pState)
 			}
 		}
         
+		// Applying all game objects except for workshop:
+		GameObject* obj = pCell->GetGameObject();
+		if (obj)
+			obj->Apply(pGrid, pState, this);
+
 		if (i < savedCommandCount - 1)
 		{
 			int x, y;
 			pGrid->GetInput()->GetPointClicked(x, y);
 		}
 	}
-
-	// Applying game object:
+	pState->SetCurrentPhase(PHASE_PLANNING); // dlw mmkn y apply workshop
 	GameObject* obj = pCell->GetGameObject();
 	if (obj)
 		obj->Apply(pGrid, pState, this);
@@ -190,4 +194,9 @@ void Player::AppendPlayerInfo(string& playersInfo) const
 		}
 	playersInfo += Strdir + ", ";
 	playersInfo += to_string(health) + ")";
+}
+
+int Player::getSavedCommandCount() const
+{
+	return savedCommandCount;
 }
