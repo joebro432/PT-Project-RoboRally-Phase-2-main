@@ -1,6 +1,7 @@
 #include "Flag.h"
 #include"Player.h"
 #include"GameState.h"
+#include <fstream>
 Flag::Flag(const CellPosition & flagposition) : GameObject(flagposition)
 {
 
@@ -37,4 +38,13 @@ void Flag::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 Flag::~Flag()
 {
 
+}
+void Flag::Save(ofstream& OutFile, int type)
+{
+	// Save the cell number of the flag
+	OutFile << position.GetCellNum() << " ";
+}
+
+void Flag::Load(ifstream& Infile)
+{
 }

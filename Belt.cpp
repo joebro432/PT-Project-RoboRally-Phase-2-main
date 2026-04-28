@@ -46,7 +46,8 @@ void Belt::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 	Input* pIn = pGrid->GetInput();
 
 	pOut->PrintMessage("You have reached a belt! You will be moved along the belt. Click to continue.");
-	pIn->GetCellClicked();
+	int x, y;
+	pGrid->GetInput()->GetPointClicked(x, y);
 
 
 
