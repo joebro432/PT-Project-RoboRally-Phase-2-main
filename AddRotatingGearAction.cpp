@@ -6,7 +6,7 @@ AddRotatingGearAction::AddRotatingGearAction(ApplicationManager * pApp):Action(p
 
 void AddRotatingGearAction::ReadActionParameters()
 {
-	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below
+	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below DONE
 
 
 	// == Here are some guideline steps (numbered below) to implement this function ==
@@ -71,7 +71,7 @@ void AddRotatingGearAction::Execute()
 	// The first line of any Action Execution is to read its parameter first 
 	// and hence initializes its data members
 	ReadActionParameters();
-	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below
+	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below DONE
 	// == Here are some guideline steps (numbered below) to implement this function ==
 
 	// 1-Create a rotating gear object
