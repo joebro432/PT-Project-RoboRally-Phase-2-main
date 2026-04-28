@@ -7,9 +7,22 @@
 
 Belt::Belt(const CellPosition & startCellPos, const CellPosition & endCellPos) : GameObject(startCellPos)
 {
-	this->endCellPos = endCellPos;
 
-	///TODO: Do the needed validation
+	if (startCellPos.VCell() != endCellPos.VCell() &&
+		startCellPos.HCell() != endCellPos.HCell()) {
+		// Diagonal belt so belt does nothing
+		this->endCellPos = startCellPos;
+	}
+	// Check if start and end are the same cell
+	else if (startCellPos.GetCellNum() == endCellPos.GetCellNum()) {
+		// Same cell belt does nothing
+		this->endCellPos = startCellPos;
+	}
+	else {
+		// Valid belt
+		this->endCellPos = endCellPos;
+	}
+	///TODO: Do the needed validation DONE 
 }
 void Belt::Draw(Output* pOut) const
 {
@@ -20,7 +33,7 @@ void Belt::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 {
 
 
-	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below
+	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below DONE
 
 
 	// == Here are some guideline steps (numbered below) to implement this function ==

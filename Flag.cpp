@@ -23,6 +23,7 @@ void Flag::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 	pGrid->GetInput()->GetPointClicked(x, y);
 	// 2- Apply the flag's effect by ending the game
 	//    Review the "pGrid" functions and decide which function can be used for that
+
 	if (pPlayer->getPlayerNum() == 0) 
 		pGrid->GetOutput()->PrintMessage("Player 1 wins! Click to continue ...");
 	else
@@ -30,6 +31,7 @@ void Flag::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 
 	pGrid->GetInput()->GetPointClicked(x, y);
 	pState->SetEndGame(true);
+   
 }
 
 Flag::~Flag()

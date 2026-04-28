@@ -194,6 +194,9 @@
       <Filter>Actions</Filter>
     </ClCompile>
     <ClCompile Include="DeleteGameObject.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="SwitchToDesignModeAction.cpp" />
+    <ClCompile Include="SwitchToPlayModeAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -318,5 +321,8 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="DeleteGameObject.h" />
+    <ClInclude Include="SwitchToDesignModeAction.h" />
+    <ClInclude Include="SwitchToPlayModeAction.h" />
+    <ClInclude Include="GameState.h" />
   </ItemGroup>
 </Project>
