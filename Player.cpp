@@ -200,3 +200,8 @@ int Player::getSavedCommandCount() const
 {
 	return savedCommandCount;
 }
+
+const int Player::getPlayerNum() const
+{
+	return playerNum;
+}

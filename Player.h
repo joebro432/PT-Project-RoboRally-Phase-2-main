@@ -48,6 +48,7 @@ public:
 
 	///TODO: Add more setters/getters here as needed
 	int getSavedCommandCount() const;
+	const int getPlayerNum() const;
 	// ====== Saved Commands ======
 
 	void    AddSavedCommand(Command cmd);         // Appends cmd to savedCommands (called by SelectCommandAction)
