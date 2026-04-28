@@ -3,7 +3,8 @@
 #include "Output.h"
 #include "Input.h"
 #include "Player.h" 
-
+#include <fstream>
+#include <string>
 
 
 RotatingGear::RotatingGear(const CellPosition & gearposition,bool clockwise) : GameObject(gearposition)
@@ -75,4 +76,20 @@ bool RotatingGear::GetisClockWise() const
 
 RotatingGear::~RotatingGear()
 {
+}
+void RotatingGear::Save(ofstream& OutFile)
+{
+	// Save cell number and direction (1 for clockwise, 0 for counter-clockwise)
+	OutFile << position.GetCellNum() << " ";
+	if (isClockWise == true) {
+		OutFile << "1 ";
+	}
+	else {
+		OutFile << "0 ";
+	}
+}
+void RotatingGear::Load(ifstream& Infile){
+	int dir;
+	Infile >> dir;
+	isClockWise = (dir == 1);
 }

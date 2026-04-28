@@ -4,6 +4,9 @@
 #include "Output.h"
 #include "Input.h"
 #include "Player.h"     
+#include <fstream>
+#include <string>
+
 
 Belt::Belt(const CellPosition & startCellPos, const CellPosition & endCellPos) : GameObject(startCellPos)
 {
@@ -43,7 +46,8 @@ void Belt::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 	Input* pIn = pGrid->GetInput();
 
 	pOut->PrintMessage("You have reached a belt! You will be moved along the belt. Click to continue.");
-	pIn->GetCellClicked();
+	int x, y;
+	pGrid->GetInput()->GetPointClicked(x, y);
 
 
 
@@ -62,6 +66,19 @@ CellPosition Belt::GetEndPosition() const
 {
 	return endCellPos;
 }
+
+void Belt::Save(ofstream& OutFile)
+{
+	// Saves start cell and end cell
+	OutFile << position.GetCellNum() << " " << endCellPos.GetCellNum() << " ";
+}
+
+
+void Belt::Load(ifstream& Infile)
+{}
+
+
+
 
 
 Belt::~Belt()
