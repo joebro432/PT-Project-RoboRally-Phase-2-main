@@ -61,8 +61,8 @@ void AddFlagAction::Execute()
 	// 4-Check if the flag was added and print an errror message if flag couldn't be added
 	if (!added)
 	{
-		// Print an appropriate message
 		pGrid->PrintErrorMessage("Error: Cell already has an object ! Click to continue ...");
+		delete pflag;
 	}
 }
 
