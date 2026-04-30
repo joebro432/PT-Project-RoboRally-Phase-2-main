@@ -33,14 +33,17 @@ GameState::~GameState()
 
 Player* GameState::GetCurrentPlayer() const
 {
-	///TODO: Return the player whose turn it is
-	return PlayerList[0]; // wrong -- update this
+	///(DONE) TODO: Return the player whose turn it is
+	return PlayerList[currPlayerNumber]; // wrong -- update this (UPDATED FROM 0 -> currPlayerNumber) 
 }
 
 Player* GameState::GetPlayer(int playerNum) const
 {
-	///TODO: Return the player with the given player number
-	return PlayerList[0]; // wrong -- update this
+	///(DONE) TODO: Return the player with the given player number
+	if (playerNum < 0 || playerNum >= MaxPlayerCount) //check validity of playerNum
+		return NULL; 
+
+	return PlayerList[playerNum]; // wrong -- update this (UPDATED FROM 0 -> playerNum)
 }
 
 // ========== Turn Management ==========
@@ -52,7 +55,11 @@ void GameState::AdvanceCurrentPlayer()
 
 void GameState::SetFirstPlayer(int playerNum)
 {
-	///TODO: Implement this function to set which player goes first this round
+	///(DONE) TODO: Implement this function to set which player goes first this round
+	if (playerNum < 0 || playerNum >= MaxPlayerCount) //check validity of playerNum
+		return;
+	currPlayerNumber = playerNum;
+	// will check the bonus with the Antenna.cpp
 }
 
 // ========== Phase Management ==========
@@ -70,9 +77,26 @@ void GameState::SetCurrentPhase(PhaseType phase)
 void GameState::AdvancePhase()
 {
 	// Currently only PHASE_MOVEMENT exists.
-	// [OPTIONAL BONUS] If you add PHASE_SHOOTING to the PhaseType enum (DEFS.h),
-	// update this to cycle:  MOVEMENT --> SHOOTING --> MOVEMENT
-	currentPhase = PHASE_MOVEMENT;
+	// [OPTIONAL BONUS] If you add PHASE_SHOOTING to the PhaseType enum (DEFS.h), [ADDED] need to make any additions for shooting
+	// [UPDATED] update this to cycle:  MOVEMENT --> SHOOTING --> MOVEMENT 
+	switch (currentPhase)
+	{
+	case PHASE_MOVEMENT:
+	{
+		currentPhase = PHASE_SHOOTING; // To switch between the two game mode phases
+		break;
+	}
+
+	case PHASE_SHOOTING:
+	{
+		currentPhase = PHASE_MOVEMENT;
+		break;
+
+	}
+	default:
+		currentPhase = PHASE_MOVEMENT; // Default phase
+		break;
+	}
 }
 
 // ========== End-Game ==========
@@ -91,7 +115,9 @@ void GameState::SetEndGame(bool end)
 
 void GameState::DrawAllPlayers(Output* pOut) const
 {
-	///TODO: Draw all players
+	///(DONE) TODO: Draw all players
+	for (int i = 0; i < MaxPlayerCount; i++)
+		PlayerList[i]->Draw(pOut);
 }
 
 void GameState::AppendPlayersInfo(string& info) const

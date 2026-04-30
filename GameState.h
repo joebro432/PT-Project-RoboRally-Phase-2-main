@@ -53,7 +53,7 @@ public:
 	//
 	// Example (2 players): SetFirstPlayer(1) --> turn order is [1, 0]
 	//
-	// [OPTIONAL] For 3+ players with full sorting, replace this with
+	// [OPTIONAL] For 3+ players with full sorting, replace this with --------> Will check the bonus with the Antenna.cpp
 	//            SetPlayerOrder(int sortedOrder[], int count).
 	void SetFirstPlayer(int playerNum);
 
@@ -65,7 +65,7 @@ public:
 	void SetCurrentPhase(PhaseType phase);
 
 	// Advances to the next phase in the round.
-	// [OPTIONAL BONUS] To add PHASE_SHOOTING, update this function body:
+	// [OPTIONAL BONUS] To add PHASE_SHOOTING, update this function body: [ADDED]
 	//   MOVEMENT --> SHOOTING --> MOVEMENT
 	void AdvancePhase();
 

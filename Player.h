@@ -23,8 +23,9 @@ class Player
 
 	// ---- [OPTIONAL BONUS] Shooting Phase data members ----
 	// Uncomment when adding the shooting phase (see DEFS.h PhaseType):
-	//   int laserDamage; // damage per shot (default = 1; double-laser consumable = 2)
-	//   bool isHacked;   // true = this player skips their turn this round
+	 
+	int laserDamage; // damage per shot (default = 1; double-laser consumable = 2)
+	bool isHacked;   // true = this player skips their turn this round
 
 	// ---- [OPTIONAL BONUS] Workshop Consumables data members ----
 	// Uncomment when adding consumables (see Workshop.h):
@@ -46,8 +47,8 @@ public:
 	Direction GetDirection() const;
 	void      SetDirection(Direction d);
 
-	///TODO: Add more setters/getters here as needed
-
+	///(DONE) TODO: Add more setters/getters here as needed
+	const int getPlayerNum() const;
 	// ====== Saved Commands ======
 
 	void    AddSavedCommand(Command cmd);         // Appends cmd to savedCommands (called by SelectCommandAction)

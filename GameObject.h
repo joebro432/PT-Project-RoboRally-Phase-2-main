@@ -26,8 +26,8 @@ public:
 	virtual void Apply(Grid* pGrid, GameState* pState, Player* pPlayer) = 0;
 
 	// Save / Load (uncomment and implement in derived classes when needed):
-	// virtual void Save(ofstream& OutFile) = 0;
-	// virtual void Load(ifstream& Infile)  = 0;
+	 virtual void Save(ofstream& OutFile) = 0;
+	 virtual void Load(ifstream& Infile)  = 0;
 
 	virtual ~GameObject();
 };

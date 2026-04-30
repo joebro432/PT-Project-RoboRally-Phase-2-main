@@ -11,7 +11,7 @@ AddFlagAction::AddFlagAction(ApplicationManager *pApp) : Action(pApp)
 void AddFlagAction::ReadActionParameters()
 {
 
-	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below
+	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below DONE
 
 	// == Here are some guideline steps (numbered below) to implement this function ==
 
@@ -47,7 +47,7 @@ void AddFlagAction::Execute()
 	// The first line of any Action Execution is to read its parameter first 
 	// and hence initializes its data members
 	ReadActionParameters();
-	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below
+	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below DONE
 	// == Here are some guideline steps (numbered below) to implement this function ==
 
 	// 1-Create a flag object
@@ -61,8 +61,8 @@ void AddFlagAction::Execute()
 	// 4-Check if the flag was added and print an errror message if flag couldn't be added
 	if (!added)
 	{
-		// Print an appropriate message
 		pGrid->PrintErrorMessage("Error: Cell already has an object ! Click to continue ...");
+		delete pflag;
 	}
 }
 

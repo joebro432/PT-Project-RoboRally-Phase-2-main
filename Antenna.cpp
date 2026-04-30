@@ -1,5 +1,5 @@
 #include "Antenna.h"
-
+#include<fstream>
 
 
 
@@ -34,4 +34,10 @@ void Antenna::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 
 Antenna::~Antenna()
 {
+}
+void Antenna::Save(ofstream& OutFile) {
+	OutFile << "ANTENNA" << " " << position.GetCellNum() << endl
+		;//save el cell position bta3t el antenna 
+}
+void Antenna::Load(ifstream& Infile) {
 }

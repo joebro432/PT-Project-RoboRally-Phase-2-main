@@ -44,7 +44,7 @@ void AddBeltAction::ReadActionParameters()
 		}
 	}
 
-	///TODO: Make the needed validations on the read parameters
+	///TODO: Make the needed validations on the read parameters DONE 
 
 
 
