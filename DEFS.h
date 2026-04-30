@@ -70,10 +70,11 @@ enum ActionType // The actions supported (add more as needed)
 enum PhaseType
 {
 	PHASE_MOVEMENT,  // players execute their saved commands
-	///TODO: Add more phases here as needed
+	///(DONE) TODO: Add more phases here as needed [PLANNING for SwitchToDesignModeAction
+//													SHOOTING for GameState				]
 
 	PHASE_PLANNING,   // players select commands to save for the next round
-	
+	PHASE_SHOOTING,   // BONUS
 };
 
 enum Direction // Directions of the game

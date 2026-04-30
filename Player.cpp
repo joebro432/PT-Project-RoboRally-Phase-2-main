@@ -11,6 +11,9 @@ Player::Player(Cell* pCell, int playerNum)
 	// Initialise saved commands to NO_COMMAND
 	for (int i = 0; i < MaxSavedCommands; i++)
 		savedCommands[i] = NO_COMMAND;
+
+	laserDamage = 1;
+	isHacked = false;
 }
 
 // ====== Setters and Getters ======
@@ -37,7 +40,13 @@ void      Player::SetDirection(Direction d) { currDirection = d; }
 
 void Player::AddSavedCommand(Command cmd)
 {
-	if (savedCommandCount < MaxSavedCommands)
+	int commandCountLimit;
+	if(health<MaxSavedCommands)
+		commandCountLimit = health;
+	else
+		commandCountLimit = MaxSavedCommands; //MaxSavedCommands defined in DEFS.h by 5;
+
+	if (savedCommandCount < commandCountLimit)
 		savedCommands[savedCommandCount++] = cmd;
 }
 
@@ -48,7 +57,10 @@ void Player::ClearSavedCommands()
 	savedCommandCount = 0;
 }
 
+
 int     Player::GetSavedCommandCount() const { return savedCommandCount; }
+
+
 Command Player::GetSavedCommand(int index) const
 {
 	if (index >= 0 && index < savedCommandCount)
@@ -56,7 +68,9 @@ Command Player::GetSavedCommand(int index) const
 	return NO_COMMAND;
 }
 
+
 // ====== Drawing Functions ======
+
 
 void Player::Draw(Output* pOut) const
 {
@@ -92,7 +106,7 @@ void Player::Move(Grid* pGrid, GameState* pState)
 	// - Use CellPosition and Grid to handle movement and cell updates
 	if (savedCommandCount <= 0)
 		return;
-	pState->SetCurrentPhase(PHASE_MOVEMENT); // El player beyt7ark
+
 	for (int i = 0; i < savedCommandCount; i++)
 	{
 		Command cmd = savedCommands[i];
@@ -118,7 +132,7 @@ void Player::Move(Grid* pGrid, GameState* pState)
 			case RIGHT: currDirection = UP;    break;
 			}
 		}
-		else if (cmd == NO_COMMAND) break;
+		else if (cmd == NO_COMMAND) continue;
 		else
 		{
 			//Steps
@@ -150,7 +164,7 @@ void Player::Move(Grid* pGrid, GameState* pState)
 			else
 				steps = 0;
 
-        if (steps > 0)
+			if (steps > 0)
 			{
 				CellPosition newPos = pCell->GetCellPosition();
 				newPos.AddCellNum(steps, moveDir);
@@ -158,14 +172,14 @@ void Player::Move(Grid* pGrid, GameState* pState)
 				if (newPos.IsValidCell())
 				{
 					pGrid->UpdatePlayerCell(this, newPos);
+
+					GameObject* obj = pCell->GetGameObject();
+					if (obj!= NULL && !pCell->HasWorkshop())
+						obj->Apply(pGrid, pState, this);
 				}
 			}
 		}
         
-		// Applying all game objects except for workshop:
-		GameObject* obj = pCell->GetGameObject();
-		if (obj)
-			obj->Apply(pGrid, pState, this);
 
 		if (i < savedCommandCount - 1)
 		{
@@ -173,10 +187,12 @@ void Player::Move(Grid* pGrid, GameState* pState)
 			pGrid->GetInput()->GetPointClicked(x, y);
 		}
 	}
-	pState->SetCurrentPhase(PHASE_PLANNING); // dlw mmkn y apply workshop
-	GameObject* obj = pCell->GetGameObject();
-	if (obj)
-		obj->Apply(pGrid, pState, this);
+
+	GameObject* finalObj = pCell->GetGameObject();
+
+	if (finalObj != NULL && pCell->HasWorkshop())
+		finalObj->Apply(pGrid, pState, this);
+
 }
 
 void Player::AppendPlayerInfo(string& playersInfo) const
@@ -196,10 +212,6 @@ void Player::AppendPlayerInfo(string& playersInfo) const
 	playersInfo += to_string(health) + ")";
 }
 
-int Player::getSavedCommandCount() const
-{
-	return savedCommandCount;
-}
 
 const int Player::getPlayerNum() const
 {
