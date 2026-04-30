@@ -8,10 +8,14 @@ class Grid;
 class Output;
 class GameObject;
 class Belt;
-class WaterPit;
 class Flag;
+class WaterPit;
 class Player;
 class DangerZone;
+//added new forward declarations for new Has functions
+class RotatingGear;
+class Workshop;
+class Antenna;
 class Cell
 {
 	const CellPosition position;	// the cell position (vCell and hCell) --> will not change after the Cell is constructed
@@ -31,15 +35,19 @@ public:
 	bool SetGameObject(GameObject * pGObj);	// A setter for pGameObject of the cell
 	                                        // It does NOT add the object and returns false if the cell already contains one
 	GameObject * GetGameObject() const;     // A getter for pGameObject of the cell
-	//TODO implement similar functions to check if a cell has a specific gameobject if needed	
+	//(DONE) TODO implement similar functions to check if a cell has a specific gameobject if needed	
 	Belt * HasBelt() const;	// Checks if pGameObject is a Belt Then returns true if it is a belt or returns NULL if not belt
 	Flag * HasFlag() const;	    // Checks if pGameObject is a Flag Then returns true if it is a flag or returns NULL if not flag
 	WaterPit* HasWaterPit() const;
 	DangerZone* HasDangerZone() const;
+	//Added new similar functions to above ones
+	RotatingGear* HasRotatingGear() const;
+	Workshop* HasWorkshop() const;
+	Antenna* HasAntenna() const;
 	// ======= Drawing Functions ======= 
 
 	void DrawCellOrWaterPitOrDangerZone(Output* pOut) const;	// Draws the Cell either has waterpit or dangerzone(either of the gameobjects changes the cell color)
-	//TODO:complete the implementation
+	//(DONE) TODO:complete the implementation
 	// Draws other game objects(excluding danger zone and waterpit)  of the Cell if found
 	// The two Draw functions are separated because we should draw all cells first
 	// then draw all other game objects, in order to avoid overlapping 
