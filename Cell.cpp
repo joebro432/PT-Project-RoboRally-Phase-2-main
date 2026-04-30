@@ -6,8 +6,9 @@
 #include "WaterPit.h"
 #include "Player.h"
 #include "DangerZone.h"
-#include "Output.h"
 #include "Workshop.h"
+#include "Output.h"
+
 Cell::Cell(const CellPosition & pos) : position(pos)
 {
 	// initializes the data members (position & pGameObject)
@@ -74,11 +75,6 @@ DangerZone * Cell::HasDangerZone() const
 		return dynamic_cast<DangerZone *>(pGameObject);
 		//DONE
 	//return false; // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
-}
-
-Workshop* Cell::HasWorkshop() const
-{
-	return dynamic_cast<Workshop *>(pGameObject);
 }
 
 
