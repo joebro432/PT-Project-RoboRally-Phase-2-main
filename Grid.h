@@ -68,6 +68,8 @@ public:
 	Cell* GetStartCell() const;
 
 	///TODO: Add any additional board-query getters here (e.g. GetCell(CellPosition))
+	Cell* GetCell(const CellPosition& pos)const;
+	//DONE
 
 	// ========== User Interface ==========
 
@@ -77,6 +79,7 @@ public:
 	void UpdateInterface(const GameState* pState) const;
 
 	void PrintErrorMessage(string msg); // Shows msg on the status bar, waits for a click, then clears it
-
+	
+	
 	~Grid();
 };

@@ -1,5 +1,5 @@
 #include "Cell.h"
-
+#include "Flag.h"
 #include "Grid.h"
 #include "GameObject.h"
 #include "Belt.h"
@@ -52,24 +52,27 @@ Flag * Cell::HasFlag() const
 {
 
 	///TODO: Implement the following function like HasBelt() function
-
-	return false; // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
+return dynamic_cast<Flag *>(pGameObject);
+//DONE
+	// THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
 
 }
 WaterPit * Cell::HasWaterPit() const
 {
 
 	///TODO: Implement the following function like HasBelt() function
-
-	return false; // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
+	return dynamic_cast<WaterPit *>(pGameObject);
+	//DONE
+	//return false; // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
 
 }
 
 DangerZone * Cell::HasDangerZone() const
 {
 	///TODO: Implement the following function like HasBelt() function
-
-	return false; // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
+		return dynamic_cast<DangerZone *>(pGameObject);
+		//DONE
+	//return false; // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
 }
 
 
@@ -90,7 +93,13 @@ void Cell::DrawCellOrWaterPitOrDangerZone(Output* pOut) const
 void Cell::DrawGameObject(Output* pOut) const
 {
 	//TODO: edit this incomplete implemntation to check for other game objects (excluding waterpits and dangerzones)
+	if (pGameObject == nullptr) // if there is no game object in the cell, do nothing
+		return;
+	if (HasDangerZone() || HasWaterPit()) // if there is a waterpit or a dangerzone, we already drew it in the previous function, so we should not draw it again here
+		return;
+
 	if (HasFlag()|| HasBelt())
 		pGameObject->Draw(pOut); // draw game object
 
+	//DONE
 }

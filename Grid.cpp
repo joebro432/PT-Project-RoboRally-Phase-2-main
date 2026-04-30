@@ -23,16 +23,27 @@ Grid::Grid(Input* pIn, Output* pOut) : pIn(pIn), pOut(pOut)
 bool Grid::AddObjectToCell(GameObject* pNewObject)
 {
 	CellPosition pos = pNewObject->GetPosition();
-	if (pos.IsValidCell())
+	if (!pos.IsValidCell())// invalid cell position
 	{
-		GameObject* pPrevObject = CellList[pos.VCell()][pos.HCell()]->GetGameObject();
-		if (pPrevObject) // cell already has an object
-			return false;
-
-		CellList[pos.VCell()][pos.HCell()]->SetGameObject(pNewObject);
-		return true;
+		return false;
 	}
-	return false;
+	
+		if (pos.GetCellNum() == 1 || pos.GetCellNum() == 55)
+		{
+			return false;
+		}// players start at cell 1, so we should not allow adding objects there; also, cell 55 is the end cell, so we should not allow adding objects ther
+		GameObject* pPrevObject = CellList[pos.VCell()][pos.HCell()]->GetGameObject();// get the game object in the cell of the new object position
+		if (pPrevObject) // cell already has an object
+		{
+			return false;
+		}
+
+		
+			CellList[pos.VCell()][pos.HCell()]->SetGameObject(pNewObject);// add the new object to the cell
+			return true;
+	
+	
+	//FIXED
 }
 
 void Grid::RemoveObjectFromCell(const CellPosition& pos)
@@ -40,7 +51,13 @@ void Grid::RemoveObjectFromCell(const CellPosition& pos)
 	if (pos.IsValidCell())
 	{
 		// Note: deallocate the object here before NULLing if ownership requires it
-		CellList[pos.VCell()][pos.HCell()]->SetGameObject(NULL);
+
+		GameObject* pObj = CellList[pos.VCell()][pos.HCell()]->GetGameObject();
+		if (pObj!=nullptr) {
+			delete pObj; 
+			CellList[pos.VCell()][pos.HCell()]->SetGameObject(NULL); 
+		}
+		//FIXED
 	}
 }
 
@@ -60,6 +77,11 @@ Belt* Grid::GetNextBelt(const CellPosition& position)
 		for (int j = startH; j < NumHorizontalCells; j++) // searching from startH and RIGHT
 		{
 			///TODO: Check if CellList[i][j] has a belt, if yes return it
+			GameObject* pObj = CellList[i][j]->GetGameObject(); // get the game object in the current cell
+			Belt* pBelt = dynamic_cast<Belt*>(pObj);  //if the game object is a belt, pBelt will point to it; if not, pBelt will be NULL
+			if (pBelt)
+				return pBelt;
+			//DONE
 		}
 		startH = 0; // because in the next above rows, we will search from the first left cell (hCell = 0) to the right
 	}
@@ -80,6 +102,14 @@ Cell* Grid::GetStartCell() const
 {
 	// Players start at the bottom-left cell of the board
 	return CellList[NumVerticalCells - 1][0];
+}
+
+Cell* Grid::GetCell(const CellPosition& pos) const
+{
+	if (!pos.IsValidCell()){
+		return nullptr;
+}
+	return CellList[pos.VCell()][pos.HCell()];
 }
 
 
@@ -110,7 +140,7 @@ void Grid::UpdateInterface(const GameState* pState) const
 		string playersInfo = "";
 		pState->AppendPlayersInfo(playersInfo);
 		pOut->PrintPlayersInfo(playersInfo);
-
+		 
 		// Note: UpdatePlayerCell() already redraws players step-by-step during Play mode.
 	}
 }
