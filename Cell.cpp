@@ -7,13 +7,6 @@
 #include "Player.h"
 #include "DangerZone.h"
 #include "Output.h"
-//Added some includes for the Has(object) functions
-#include "Flag.h"
-#include"Antenna.h"
-#include"RotatingGear.h"
-#include"Workshop.h"
-
-
 Cell::Cell(const CellPosition & pos) : position(pos)
 {
 	// initializes the data members (position & pGameObject)
@@ -58,47 +51,28 @@ Belt * Cell::HasBelt() const
 Flag * Cell::HasFlag() const
 {
 
-	///(DONE) TODO: Implement the following function like HasBelt() function
+	///TODO: Implement the following function like HasBelt() function
 
-	return dynamic_cast<Flag *>(pGameObject); // (CHANGED) THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
+	return false; // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
 
 }
 WaterPit * Cell::HasWaterPit() const
 {
 
-	///(DONE) TODO: Implement the following function like HasBelt() function
+	///TODO: Implement the following function like HasBelt() function
 
-	return dynamic_cast<WaterPit *>(pGameObject); //(CHANGED) THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
+	return false; // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
 
 }
 
 DangerZone * Cell::HasDangerZone() const
 {
-	///(DONE) TODO: Implement the following function like HasBelt() function
+	///TODO: Implement the following function like HasBelt() function
 
-	return dynamic_cast<DangerZone *>(pGameObject); // (CHANGED) THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
+	return false; // THIS LINE SHOULD CHANGED WITH YOUR IMPLEMENTATION
 }
 
-//Added new similar functions to above ones ( was a todo in the header file (DONE) )
 
-RotatingGear* Cell::HasRotatingGear() const 
-{
-	
-	return dynamic_cast<RotatingGear*>(pGameObject);
-
-}
-Workshop* Cell::HasWorkshop() const 
-{
-
-	return dynamic_cast<Workshop*>(pGameObject);
-
-}
-Antenna* Cell::HasAntenna() const 
-{
-
-	return dynamic_cast<Antenna*>(pGameObject);
-
-}
 // ======= Drawing Functions ======= 
 
 void Cell::DrawCellOrWaterPitOrDangerZone(Output* pOut) const
@@ -115,10 +89,8 @@ void Cell::DrawCellOrWaterPitOrDangerZone(Output* pOut) const
 //because other game objects don't change color of the cell
 void Cell::DrawGameObject(Output* pOut) const
 {
-	//(DONE) TODO: edit this incomplete implemntation to check for other game objects (excluding waterpits and dangerzones)
-	
-	if (HasFlag()|| HasBelt()|| HasAntenna()|| HasRotatingGear()|| HasWorkshop())
+	//TODO: edit this incomplete implemntation to check for other game objects (excluding waterpits and dangerzones)
+	if (HasFlag()|| HasBelt())
 		pGameObject->Draw(pOut); // draw game object
 
-	//no need for else, all empty cells will be drawn in else in DrawCellOrWaterPitOrDangerZone()
 }

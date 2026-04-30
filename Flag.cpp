@@ -15,7 +15,7 @@ void Flag::Draw(Output* pOut) const
 void Flag::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 {
 
-	///(DONE) TODO: Implement this function as mentioned in the guideline steps (numbered below) below
+	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below
 	// == Here are some guideline steps (numbered below) to implement this function ==
 
 	// 1- Print a message "You have reached a flag. Click to continue ..." and wait mouse click
