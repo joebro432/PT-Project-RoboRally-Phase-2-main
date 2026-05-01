@@ -80,6 +80,7 @@ public:
 
 	void PrintErrorMessage(string msg); // Shows msg on the status bar, waits for a click, then clears it
 	
+	void SaveAll(ofstream& OutFile) const; // Saves the entire grid to the file (calls Save on each GameObject)
 	
 	~Grid();
 };

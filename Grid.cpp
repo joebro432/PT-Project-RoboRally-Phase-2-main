@@ -153,6 +153,20 @@ void Grid::PrintErrorMessage(string msg)
 	pOut->ClearStatusBar();
 }
 
+void Grid::SaveAll(ofstream& OutFile) const
+{
+	for (int i = NumVerticalCells - 1; i >= 0; i--) //moving from the top row to the bottom row(saving the cells as drawn)
+	{
+		for (int j = 0; j < NumHorizontalCells; j++)//moving from the left cell to the right cell in the current row
+		{
+			if (CellList[i][j]->GetGameObject()) //save if only there is a game object in the cell
+			{
+				CellList[i][j]->GetGameObject()->Save(OutFile);
+			}
+		}
+	}
+}
+
 
 Grid::~Grid()
 {
