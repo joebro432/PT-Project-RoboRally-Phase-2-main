@@ -113,7 +113,7 @@ void Cell::DrawGameObject(Output* pOut) const
 	if (HasDangerZone() || HasWaterPit()) // if there is a waterpit or a dangerzone, we already drew it in the previous function, so we should not draw it again here
 		return;
 
-	if (HasFlag()|| HasBelt())
+	if (HasFlag()|| HasBelt() ||HasWorkshop() || HasRotatingGear() || HasAntenna())
 		pGameObject->Draw(pOut); // draw game object
 
 	//DONE
