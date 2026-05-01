@@ -50,11 +50,19 @@ void AddFlagAction::Execute()
 	///TODO: Implement this function as mentioned in the guideline steps (numbered below) below DONE
 	// == Here are some guideline steps (numbered below) to implement this function ==
 
+	Grid* pGrid = pManager->GetGrid();
+	if(pGrid->GridHasFlag()) //checks if there is already a flag in the grid or not
+	{
+		pGrid->PrintErrorMessage("Error: There is already a flag in the grid! Click to continue ...");
+		return;
+	}
+
 	// 1-Create a flag object
 	Flag* pflag = new Flag(flagPos);
 	// 2-get a pointer to the Grid from the ApplicationManager
-	Grid* pGrid = pManager->GetGrid();
 	
+	//already created above
+
 	// 3-Add the flag object to the GameObject of its Cell:	
 	bool added = pGrid->AddObjectToCell(pflag);
 

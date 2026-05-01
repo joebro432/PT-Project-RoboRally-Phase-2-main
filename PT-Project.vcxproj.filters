@@ -197,6 +197,14 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="SwitchToDesignModeAction.cpp" />
     <ClCompile Include="SwitchToPlayModeAction.cpp" />
+    <ClCompile Include="LoadGridAction.cpp" />
+    <ClCompile Include="SaveGridAction.cpp" />
+    <ClCompile Include="AddWaterPitAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="AddDangerZoneAction.cpp">
+      <Filter>Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -324,5 +332,13 @@
     <ClInclude Include="SwitchToDesignModeAction.h" />
     <ClInclude Include="SwitchToPlayModeAction.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="LoadGridAction.h" />
+    <ClInclude Include="SaveGridAction.h" />
+    <ClInclude Include="AddWaterPitAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="AddDangerZoneAction.h">
+      <Filter>Actions</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
