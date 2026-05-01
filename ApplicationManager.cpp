@@ -5,8 +5,16 @@
 #include "AddBeltAction.h"
 #include "AddRotatingGearAction.h"
 #include "AddFlagAction.h"
+#include "AddDangerZoneAction.h"
+#include "AddWaterPitAction.h"
 #include "SwitchToPlayModeAction.h"
 #include "SwitchToDesignModeAction.h"
+#include "LoadGridAction.h"
+#include "SaveGridAction.h"
+#include "DeleteGameObject.h"
+#include "CopyGameObjectAction.h"
+#include "CutGameObjectAction.h"
+#include "PasteGameObjectAction.h"
 ///TODO: Add #include for all action types
 
 #include "GameState.h"
@@ -86,6 +94,35 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case TO_PLAY_MODE:
 		pAct = new SwitchToPlayModeAction(this);
+		break;
+
+	case ADD_DANGER_ZONE:
+		pAct = new AddDangerZoneAction(this);
+		break;
+
+	case ADD_WATER_PITS:
+		pAct = new AddWaterPitAction(this);
+		break;
+
+	case SAVE_GRID:
+		pAct = new SaveGridAction(this);
+		break;
+
+
+	case DELETE_GAME_OBJECT:
+		pAct = new DeleteGameObject(this);
+		break;
+
+	case COPY_GAME_OBJECT:
+		pAct = new CopyGameObjectAction(this);
+		break;
+
+	case CUT_GAME_OBJECT:
+		pAct = new CutGameObjectAction(this);
+		break;
+
+	case PASTE_GAME_OBJECT:
+		pAct = new PasteGameObjectAction(this);
 		break;
 
 	case EXIT:

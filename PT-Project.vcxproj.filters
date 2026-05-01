@@ -213,6 +213,9 @@
     <ClCompile Include="LoadGridAction.cpp">
       <Filter>Actions</Filter>
     </ClCompile>
+    <ClCompile Include="CopyGameObjectAction.cpp" />
+    <ClCompile Include="CutGameObjectAction.cpp" />
+    <ClCompile Include="PasteGameObjectAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -356,5 +359,8 @@
     <ClInclude Include="LoadGridAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
+    <ClInclude Include="CopyGameObjectAction.h" />
+    <ClInclude Include="CutGameObjectAction.h" />
+    <ClInclude Include="PasteGameObjectAction.h" />
   </ItemGroup>
 </Project>

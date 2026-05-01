@@ -175,6 +175,8 @@
     <ClCompile Include="CMUgraphicsLib\jpeg\jquant1.c" />
     <ClCompile Include="CMUgraphicsLib\jpeg\jquant2.c" />
     <ClCompile Include="CMUgraphicsLib\jpeg\jutils.c" />
+    <ClCompile Include="CopyGameObjectAction.cpp" />
+    <ClCompile Include="CutGameObjectAction.cpp" />
     <ClCompile Include="DangerZone.cpp" />
     <ClCompile Include="DeleteGameObject.cpp" />
     <ClCompile Include="Flag.cpp" />
@@ -184,6 +186,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LoadGridAction.cpp" />
     <ClCompile Include="Output.cpp" />
+    <ClCompile Include="PasteGameObjectAction.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RotatingGear.cpp" />
@@ -225,6 +228,8 @@
     <ClInclude Include="CMUgraphicsLib\jpeg\jpegint.h" />
     <ClInclude Include="CMUgraphicsLib\jpeg\jpeglib.h" />
     <ClInclude Include="CMUgraphicsLib\jpeg\jversion.h" />
+    <ClInclude Include="CopyGameObjectAction.h" />
+    <ClInclude Include="CutGameObjectAction.h" />
     <ClInclude Include="DangerZone.h" />
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="DeleteGameObject.h" />
@@ -235,6 +240,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="LoadGridAction.h" />
     <ClInclude Include="Output.h" />
+    <ClInclude Include="PasteGameObjectAction.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RotatingGear.h" />
     <ClInclude Include="SaveGridAction.h" />
