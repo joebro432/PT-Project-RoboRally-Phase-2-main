@@ -198,7 +198,7 @@ void Player::Move(Grid* pGrid, GameState* pState)
 void Player::AppendPlayerInfo(string& playersInfo) const
 {
 	// (DONE) TODO: Modify the Info as needed
-	playersInfo += "P" + to_string(playerNum) + "(";
+	playersInfo += "P" + to_string(playerNum+1) + "("; // +1 to change from [0,1] to [1,2]
 	string Strdir;
 		switch (currDirection) // Switching Direction to string
 		{

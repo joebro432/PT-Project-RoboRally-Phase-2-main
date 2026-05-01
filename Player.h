@@ -39,6 +39,8 @@ public:
 	// ====== Setters and Getters ======
 
 	void  SetCell(Cell* cell);
+
+
 	Cell* GetCell() const;
 
 	void SetHealth(int h);
