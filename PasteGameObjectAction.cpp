@@ -33,7 +33,7 @@ void PasteGameObjectAction::Execute()
         }
         else
         {
-            pObject->SetPosition(pos);//setting the position of the object
+         
             if (pGrid->AddObjectToCell(pObject))//adding the object
             {
                 // added 

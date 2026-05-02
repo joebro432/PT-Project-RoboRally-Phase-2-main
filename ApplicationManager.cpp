@@ -8,6 +8,7 @@
 #include "AddDangerZoneAction.h"
 #include "AddWaterPitAction.h"
 #include "AddWorkshopAction.h"
+#include "AddAntennaAction.h"
 #include "SwitchToPlayModeAction.h"
 #include "SwitchToDesignModeAction.h"
 #include "LoadGridAction.h"
@@ -109,8 +110,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddWorkshopAction(this);
 		break;
 
+	case ADD_ANTENNA:
+		pAct = new AddAntennaAction(this);
+		break;
+
 	case SAVE_GRID:
 		pAct = new SaveGridAction(this);
+		break;
+
+	case LOAD_GRID:
+		pAct = new LoadGridAction(this);
 		break;
 
 
