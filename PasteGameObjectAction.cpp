@@ -27,19 +27,27 @@ void PasteGameObjectAction::Execute()
     if (pObject)
     {
         
-        if (pGrid->AddObjectToCell(pObject))//adding the object
+        if (!pos.IsValidCell())//checking if its out of bounce 
         {
-            // added 
+            pGrid->PrintErrorMessage("Invalid cell position. Try again.");
         }
         else
         {
-            // Cell is occupied, show error message
-            pGrid->PrintErrorMessage("there is already a cell here");
+            pObject->SetPosition(pos);//setting the position of the object
+            if (pGrid->AddObjectToCell(pObject))//adding the object
+            {
+                // added 
+            }
+            else
+            {
+                // cell already has an object
+                pGrid->PrintErrorMessage("there is already a cell here");
+            }
         }
     }
     else
     {
-     
+
         pGrid->PrintErrorMessage("Clipboard is empty sooo Nothing to paste.");
     }
 

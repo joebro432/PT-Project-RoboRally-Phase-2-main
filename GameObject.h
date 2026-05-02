@@ -18,6 +18,7 @@ public:
 	GameObject(const CellPosition& pos);
 
 	CellPosition GetPosition() const;
+	void SetPosition(const CellPosition& pos);
 
 	// ============ Virtual Functions ============
 
