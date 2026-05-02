@@ -17,8 +17,11 @@
 #include "CopyGameObjectAction.h"
 #include "CutGameObjectAction.h"
 #include "PasteGameObjectAction.h"
-///TODO: Add #include for all action types
-
+#include "ExecuteCommandsAction.h"
+#include "SelectCommandAction.h"
+#include "RebootAndRepairAction.h"
+#include "NewGameAction.h"
+///TODO: Add #include for all action types done
 #include "GameState.h"
 
 ApplicationManager::ApplicationManager()
@@ -142,17 +145,35 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case EXIT:
 		break;
 
-	///TODO: Add a case for EACH remaining Design Mode action type
+	///TODO: Add a case for EACH remaining Design Mode action type done
 
 	case TO_DESIGN_MODE:
 		pAct = new SwitchToDesignModeAction(this);
 		break;
+	case EXECUTE_COMMANDS:
+		pAct = new ExecuteCommandsAction(this);
+		break;
 
-	///TODO: Add a case for EACH remaining Play Mode action type
-	case STATUS:	// a click on the status bar ==> no action
+	case EXIT_PLAY:
+		pAct = new SwitchToDesignModeAction(this);//it exists to design mode again tbh idk what to do if i js do break it doesnt do anything
+		break;
+
+	case SELECT_COMMAND:
+		pAct = new SelectCommandAction(this);
+		break;
+
+	case REBOOT_AND_REPAIR:
+		pAct = new RebootAndRepairAction(this);
+		break;
+
+	case NEW_GAME:
+		pAct = new NewGameAction(this);
+		break;
+
+	case STATUS:	// a click on the status bar ==> no action // ummm will not touch
 		return;
 	}
-
+	///TODO: Add a case for EACH remaining Play Mode action type done
 	// Execute the created action
 	if(pAct != NULL)
 	{

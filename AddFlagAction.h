@@ -17,6 +17,6 @@ public:
 	virtual void Execute(); // Creates a new flag Object 
 							// then Sets this flag object to the GameObject Pointer of its Cell
 
-	~AddFlagAction();
+	virtual ~AddFlagAction();
 };
 

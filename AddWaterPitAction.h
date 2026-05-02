@@ -13,7 +13,7 @@ public:
 	virtual void ReadActionParameters(); 
 	virtual void Execute(); // hnCreate a new water pit Object w nhot el object l gameobjects pointer bta3 el cell
 					
-	~AddWaterPitAction();
+	virtual ~AddWaterPitAction();
 
 };
 

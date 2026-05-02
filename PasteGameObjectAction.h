@@ -10,5 +10,5 @@ public:
     PasteGameObjectAction(ApplicationManager* pApp);
     virtual void ReadActionParameters();
     virtual void Execute();
-     ~PasteGameObjectAction();
+    virtual ~PasteGameObjectAction();
 };

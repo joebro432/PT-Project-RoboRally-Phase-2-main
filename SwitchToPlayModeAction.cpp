@@ -2,6 +2,7 @@
 #include "Grid.h"
 #include "GameState.h"
 #include "Output.h"
+#include "Player.h"
 
 SwitchToPlayModeAction::SwitchToPlayModeAction(ApplicationManager* pApp) : Action(pApp)
 {
@@ -31,6 +32,10 @@ void SwitchToPlayModeAction::Execute()
 
 	///TODO: Add any other initialisation needed when entering Play Mode.
 	
+	for (int i = 0; i < MaxPlayerCount; i++)//clears all players moves to make a new game
+		pState->GetPlayer(i)->ClearSavedCommands();
+
+
 }
 
 SwitchToPlayModeAction::~SwitchToPlayModeAction()

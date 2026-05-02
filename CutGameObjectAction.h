@@ -10,5 +10,5 @@ public:
     CutGameObjectAction(ApplicationManager* pApp);
     virtual void ReadActionParameters();// Reads action parameters 
     virtual void Execute();
-     ~CutGameObjectAction();
+    virtual  ~CutGameObjectAction();
 };

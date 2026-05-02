@@ -9,6 +9,6 @@ public:
 	ExecuteCommandsAction(ApplicationManager* pApp);
 	virtual void ReadActionParameters();
 	virtual void Execute();
-	~ExecuteCommandsAction();
+	virtual ~ExecuteCommandsAction();
 };
 

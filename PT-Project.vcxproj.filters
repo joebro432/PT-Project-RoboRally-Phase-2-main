@@ -219,6 +219,9 @@
     <ClCompile Include="AddWorkshopAction.cpp" />
     <ClCompile Include="ExecuteCommandsAction.cpp" />
     <ClCompile Include="AddAntennaAction.cpp" />
+    <ClCompile Include="SelectCommandAction.cpp" />
+    <ClCompile Include="RebootAndRepairAction.cpp" />
+    <ClCompile Include="NewGameAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -368,5 +371,8 @@
     <ClInclude Include="AddWorkshopAction.h" />
     <ClInclude Include="ExecuteCommandsAction.h" />
     <ClInclude Include="AddAntennaAction.h" />
+    <ClInclude Include="SelectCommandAction.h" />
+    <ClInclude Include="RebootAndRepairAction.h" />
+    <ClInclude Include="NewGameAction.h" />
   </ItemGroup>
 </Project>
