@@ -7,6 +7,7 @@
 #include "AddFlagAction.h"
 #include "AddDangerZoneAction.h"
 #include "AddWaterPitAction.h"
+#include "AddWorkshopAction.h"
 #include "SwitchToPlayModeAction.h"
 #include "SwitchToDesignModeAction.h"
 #include "LoadGridAction.h"
@@ -102,6 +103,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case ADD_WATER_PITS:
 		pAct = new AddWaterPitAction(this);
+		break;
+
+	case ADD_WORKSHOP:
+		pAct = new AddWorkshopAction(this);
 		break;
 
 	case SAVE_GRID:

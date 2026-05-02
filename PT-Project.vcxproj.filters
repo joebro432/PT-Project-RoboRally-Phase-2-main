@@ -216,6 +216,7 @@
     <ClCompile Include="CopyGameObjectAction.cpp" />
     <ClCompile Include="CutGameObjectAction.cpp" />
     <ClCompile Include="PasteGameObjectAction.cpp" />
+    <ClCompile Include="AddWorkshopAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -362,5 +363,6 @@
     <ClInclude Include="CopyGameObjectAction.h" />
     <ClInclude Include="CutGameObjectAction.h" />
     <ClInclude Include="PasteGameObjectAction.h" />
+    <ClInclude Include="AddWorkshopAction.h" />
   </ItemGroup>
 </Project>
