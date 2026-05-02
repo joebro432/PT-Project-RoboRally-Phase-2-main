@@ -47,4 +47,7 @@ void Workshop::Save(ofstream& OutFile)
 
 void Workshop::Load(ifstream& Infile)
 {
+	int cellnum;
+	Infile >> cellnum;
+	position = CellPosition(cellnum);
 }

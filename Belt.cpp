@@ -75,7 +75,15 @@ void Belt::Save(ofstream& OutFile)
 
 
 void Belt::Load(ifstream& Infile)
-{}
+{
+
+	int endcell;
+	int startcell;
+	Infile >> endcell>>startcell;
+	
+	endCellPos = CellPosition::GetCellPositionFromNum(endcell); 
+	position = CellPosition::GetCellPositionFromNum(startcell);
+}
 
 
 

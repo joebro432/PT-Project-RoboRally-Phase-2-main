@@ -47,7 +47,9 @@ void WaterPit::Save(ofstream& OutFile)
 
 void WaterPit::Load(ifstream& Infile)
 {
-	//mafesh haga t load 
+	int cellnum;
+	Infile >> cellnum;
+	position = CellPosition(cellnum);
 }
 
 

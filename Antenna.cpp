@@ -84,4 +84,8 @@ void Antenna::Save(ofstream& OutFile) {
 
 
 void Antenna::Load(ifstream& Infile) {
+
+	int cellnum;
+	Infile >> cellnum;
+	position = CellPosition(cellnum);
 }

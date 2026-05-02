@@ -57,4 +57,10 @@ void DangerZone::Save(ofstream& OutFile)
 }
 void DangerZone::Load(ifstream& Infile)
 {
+	int cellnum;
+	Infile >> cellnum;
+
+	position= CellPosition(cellnum);
+
+
 }

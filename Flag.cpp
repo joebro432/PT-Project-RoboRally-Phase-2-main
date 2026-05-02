@@ -47,4 +47,8 @@ void Flag::Save(ofstream& OutFile)
 
 void Flag::Load(ifstream& Infile)
 {
+	int cellnum;
+	Infile >> cellnum;
+	position = CellPosition(cellnum);
+
 }
