@@ -30,8 +30,9 @@ void CutGameObjectAction::Execute()
         GameObject* pObject = pCell->GetGameObject();
         if (pObject)
         {
-            
+        
             pGrid->SetClipboard(pObject);//uses for copy or cut
+
             pCell->SetGameObject(nullptr);//removes the object but doesnt delete it so it can be pasted successfully
         }
     }
