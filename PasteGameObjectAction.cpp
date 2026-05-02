@@ -22,31 +22,28 @@ void PasteGameObjectAction::Execute()
     Grid* pGrid = pManager->GetGrid();
     ReadActionParameters();// sees if there is cut or copy first
 
-   
+    //getting location of da cell
     GameObject* pObject = pGrid->GetClipboard();
-    Cell* ptargetcell = pGrid->GetCell(pos);
-    pObject->GetPosition() = pos;
-    if (pObject != nullptr)
+    if (pObject)
     {
-        
+
         if (!pos.IsValidCell())//checking if its out of bounce 
         {
             pGrid->PrintErrorMessage("Invalid cell position. Try again.");
         }
-
-        
-        if (ptargetcell == nullptr)
+        else
         {
-            pGrid->PrintErrorMessage("Error finding cell.");
-            return;
+            pObject->SetPosition(pos);//setting the position of the object
         }
-        if (ptargetcell->GetGameObject() != nullptr)
+        if (pGrid->AddObjectToCell(pObject))//adding the object
         {
-            pGrid->PrintErrorMessage("There is already an object in this cell!");
-            return;
+            // added 
         }
-        ptargetcell->SetGameObject(pObject);
-        pGrid->SetClipboard(nullptr);
+        else
+        {
+            // cell already has an object
+            pGrid->PrintErrorMessage("there is already a cell here");
+        }
     }
     else
     {
