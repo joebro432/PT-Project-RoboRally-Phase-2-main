@@ -14,6 +14,8 @@ Grid::Grid(Input* pIn, Output* pOut) : pIn(pIn), pOut(pOut)
 			CellList[i][j] = new Cell(i, j);
 
 	Clipboard = NULL;
+	IsClipboardCut = false;
+	CutSourcePosition = CellPosition();
 }
 
 
@@ -95,8 +97,25 @@ Belt* Grid::GetNextBelt(const CellPosition& position)
 Input* Grid::GetInput() const  { return pIn; }
 Output* Grid::GetOutput() const { return pOut; }
 
-void Grid::SetClipboard(GameObject* gameObject) { Clipboard = gameObject; } // to be used in copy/cut
-GameObject* Grid::GetClipboard() const          { return Clipboard; }       // to be used in paste
+void Grid::SetClipboard(GameObject* gameObject, bool isCut, const CellPosition& sourcePos) 
+{ 
+	Clipboard = gameObject;
+	IsClipboardCut = isCut;
+	CutSourcePosition = sourcePos;
+}
+
+GameObject* Grid::GetClipboard() const { return Clipboard; }
+
+bool Grid::IsClipboardFromCut() const { return IsClipboardCut; }
+
+CellPosition Grid::GetCutSourcePosition() const { return CutSourcePosition; }
+
+void Grid::ClearClipboard()
+{
+	Clipboard = NULL;
+	IsClipboardCut = false;
+	CutSourcePosition = CellPosition();
+}
 
 Cell* Grid::GetStartCell() const
 {

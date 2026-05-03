@@ -24,6 +24,18 @@ void CopyGameObjectAction::Execute()
     Grid* pGrid = pManager->GetGrid();
     ReadActionParameters();
 
+    // if cut restored to og pos
+    if (pGrid->IsClipboardFromCut())
+    {
+        GameObject* pPrevCutObject = pGrid->GetClipboard();
+        CellPosition ogsourcepos = pGrid->GetCutSourcePosition();
+        if (pPrevCutObject && ogsourcepos.IsValidCell())
+        {
+            pPrevCutObject->SetPosition(ogsourcepos);
+            pGrid->AddObjectToCell(pPrevCutObject);
+        }
+    }
+
     //getting location of da cell
     Cell* pCell = pGrid->GetCell(pos);
     if (pCell)
@@ -33,7 +45,7 @@ void CopyGameObjectAction::Execute()
         if (pObject)
         {
             // Copy the object to clipboard
-            pGrid->SetClipboard(pObject);//used for copy and paste
+            pGrid->SetClipboard(pObject, false); // Marked as copy
         }
     }
 

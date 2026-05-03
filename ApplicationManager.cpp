@@ -98,7 +98,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case TO_PLAY_MODE:
-		pAct = new SwitchToPlayModeAction(this);
+		if (pGrid->GridHasFlag())
+		{
+			pAct = new SwitchToPlayModeAction(this);
+		}
+		else
+		{
+			pOut->PrintMessage("Error need flag to start game");
+		}
 		break;
 
 	case ADD_DANGER_ZONE:

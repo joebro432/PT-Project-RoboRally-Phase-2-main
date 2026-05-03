@@ -22,6 +22,18 @@ void CutGameObjectAction::Execute()
     Grid* pGrid = pManager->GetGrid();
     ReadActionParameters();
 
+    // If clipboard has a cut object from before, restore it to original location
+    if (pGrid->IsClipboardFromCut())
+    {
+        GameObject* pPrevCutObject = pGrid->GetClipboard();
+        CellPosition ogsourcepos = pGrid->GetCutSourcePosition();
+        if (pPrevCutObject && ogsourcepos.IsValidCell())
+        {
+            pPrevCutObject->SetPosition(ogsourcepos);
+            pGrid->AddObjectToCell(pPrevCutObject);
+        }
+    }
+
     //getting location of da cell
     Cell* pCell = pGrid->GetCell(pos);
     if (pCell)
@@ -30,8 +42,7 @@ void CutGameObjectAction::Execute()
         GameObject* pObject = pCell->GetGameObject();
         if (pObject)
         {
-        
-            pGrid->SetClipboard(pObject);//uses for copy or cut
+            pGrid->SetClipboard(pObject, true, pos); // marked as cut
 
             pCell->SetGameObject(nullptr);//removes the object but doesnt delete it so it can be pasted successfully
         }
