@@ -37,7 +37,11 @@ void PasteGameObjectAction::Execute()
         }
         if (pGrid->AddObjectToCell(pObject))//adding the object
         {
-            // added 
+            // if cut pastes one time
+            if (pGrid->IsClipboardFromCut())
+            {
+                pGrid->ClearClipboard();
+            }
         }
         else
         {

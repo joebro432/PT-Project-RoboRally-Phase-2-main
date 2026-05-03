@@ -37,6 +37,8 @@ class Grid
 	Cell* CellList[NumVerticalCells][NumHorizontalCells]; // Every cell on the board
 
 	GameObject* Clipboard; // Used in copy / cut / paste
+	bool IsClipboardCut; // used to check if cut
+	CellPosition CutSourcePosition; // Stores og location if the cut
 
 public:
 
@@ -60,8 +62,11 @@ public:
 	Input*  GetInput()  const;
 	Output* GetOutput() const;
 
-	void       SetClipboard(GameObject* gameObject);
+	void       SetClipboard(GameObject* gameObject, bool isCut = false, const CellPosition& sourcePos = CellPosition());
 	GameObject* GetClipboard() const;
+	bool       IsClipboardFromCut() const;
+	CellPosition GetCutSourcePosition() const;
+	void       ClearClipboard();
 
 	// Returns the Cell where all players start (bottom-left corner of the board).
 	// Called by GameState's constructor to initialise player positions.
