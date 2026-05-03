@@ -15,7 +15,7 @@ Player::Player(Cell* pCell, int playerNum)
 
 	availableCommandCount = 0;
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 10; i++)
 		availableCommands[i] = NO_COMMAND;
 
 	laserDamage = 1;
@@ -46,15 +46,6 @@ void      Player::SetDirection(Direction d) { currDirection = d; }
 
 void Player::AddSavedCommand(Command cmd)
 {
-	//int commandCountLimit;
-	//if(health<MaxSavedCommands)
-	//	commandCountLimit = health;
-	//else
-	//	commandCountLimit = MaxSavedCommands; //MaxSavedCommands defined in DEFS.h by 5;
-
-	//if (savedCommandCount < commandCountLimit)
-	//	savedCommands[savedCommandCount++] = cmd;
-	//cout << "Player address: " << this << endl;
 	
 	if (savedCommandCount >= 5)
 		return;
@@ -254,7 +245,7 @@ const int Player::getPlayerNum() const
 
 void Player::GenerateRandomCommands()
 {
-	availableCommandCount = 8;
+	availableCommandCount = 10;
 
 	Command base[] = {
 		MOVE_FORWARD_ONE_STEP,
@@ -267,8 +258,8 @@ void Player::GenerateRandomCommands()
 		ROTATE_COUNTERCLOCKWISE
 	};
 
-	for (int i = 0; i < 8; i++)
-		availableCommands[i] = base[i];
+	for (int i = 0; i < 10; i++)
+		availableCommands[i] = base[i%8];
 
 	savedCommandCount = 0; // reset every round
 }

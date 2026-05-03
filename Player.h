@@ -21,7 +21,7 @@ class Player
 	Command savedCommands[MaxSavedCommands];
 	int savedCommandCount; // how many commands have been saved so far (0..MaxSavedCommands)
 
-	Command availableCommands[8];
+	Command availableCommands[10];
 	int availableCommandCount;
 
 	// ---- [OPTIONAL BONUS] Shooting Phase data members ----

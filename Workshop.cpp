@@ -26,7 +26,7 @@ void Workshop::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 	pPlayer->SetHealth(pPlayer->GetHealth()+3); // Increase player's health by 3
 
 	Output* pOut = pGrid->GetOutput();
-	pOut->PrintMessage("You have reached a workshop, your health is restored to 10! Click to continue...");
+	pOut->PrintMessage("You have reached a workshop, your health will increase! Click to continue...");
 
 	Input* pIn = pGrid->GetInput();
 	int x, y;
