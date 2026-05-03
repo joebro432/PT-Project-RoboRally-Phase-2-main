@@ -21,6 +21,7 @@ GameState::GameState(Grid* pGrid)
 	currPlayerNumber = 0;         // Player 0 goes first by default
 	currentPhase = PHASE_MOVEMENT;
 	endGame = false;
+	PlayerList[currPlayerNumber]->GenerateRandomCommands();
 }
 
 GameState::~GameState()
@@ -51,6 +52,7 @@ Player* GameState::GetPlayer(int playerNum) const
 void GameState::AdvanceCurrentPlayer()
 {
 	currPlayerNumber = (currPlayerNumber + 1) % MaxPlayerCount;
+	PlayerList[currPlayerNumber]->GenerateRandomCommands();
 }
 
 void GameState::SetFirstPlayer(int playerNum)
@@ -60,6 +62,7 @@ void GameState::SetFirstPlayer(int playerNum)
 		return;
 	currPlayerNumber = playerNum;
 	// will check the bonus with the Antenna.cpp
+	PlayerList[currPlayerNumber]->GenerateRandomCommands();
 }
 
 // ========== Phase Management ==========

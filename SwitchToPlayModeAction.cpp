@@ -3,6 +3,7 @@
 #include "GameState.h"
 #include "Output.h"
 #include "Player.h"
+#include<iostream>
 
 SwitchToPlayModeAction::SwitchToPlayModeAction(ApplicationManager* pApp) : Action(pApp)
 {
@@ -24,17 +25,20 @@ void SwitchToPlayModeAction::Execute()
 	// 2. Redraw the toolbar with Play Mode buttons
 	pOut->CreatePlayModeToolBar();
 
-	// 3. Reset game state for the new play session
-	pState->SetCurrentPhase(PHASE_MOVEMENT);
+	// 3. Set phase to PLANNING so players can select commands
+	pState->SetCurrentPhase(PHASE_PLANNING);
 
-	// 4. Redraw the full interface (board + player info bar)
+	// 4. Generate available commands for the current player
+	pState->GetCurrentPlayer()->GenerateRandomCommands();
+
+	// 5. Redraw the full interface (board + player info bar)
 	pManager->UpdateInterface();
 
-	///TODO: Add any other initialisation needed when entering Play Mode.
-	
-	for (int i = 0; i < MaxPlayerCount; i++)//clears all players moves to make a new game
-		pState->GetPlayer(i)->ClearSavedCommands();
-
+	// 6. Display the commands bar with saved and available commands
+	pOut->CreateCommandsBar(pState->GetCurrentPlayer()->GetSavedCommands(),
+		pState->GetCurrentPlayer()->GetSavedCommandCount(),
+		pState->GetCurrentPlayer()->GetAvailableCommands(),
+		pState->GetCurrentPlayer()->GetAvailableCommandCount());
 
 }
 

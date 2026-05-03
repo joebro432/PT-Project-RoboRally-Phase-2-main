@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "GameState.h"
+#include <iostream>
 
 Player::Player(Cell* pCell, int playerNum)
 	: playerNum(playerNum), health(10), currDirection(RIGHT), savedCommandCount(0)
@@ -11,6 +12,11 @@ Player::Player(Cell* pCell, int playerNum)
 	// Initialise saved commands to NO_COMMAND
 	for (int i = 0; i < MaxSavedCommands; i++)
 		savedCommands[i] = NO_COMMAND;
+
+	availableCommandCount = 0;
+
+	for (int i = 0; i < 5; i++)
+		availableCommands[i] = NO_COMMAND;
 
 	laserDamage = 1;
 	isHacked = false;
@@ -40,14 +46,31 @@ void      Player::SetDirection(Direction d) { currDirection = d; }
 
 void Player::AddSavedCommand(Command cmd)
 {
-	int commandCountLimit;
-	if(health<MaxSavedCommands)
-		commandCountLimit = health;
-	else
-		commandCountLimit = MaxSavedCommands; //MaxSavedCommands defined in DEFS.h by 5;
+	//int commandCountLimit;
+	//if(health<MaxSavedCommands)
+	//	commandCountLimit = health;
+	//else
+	//	commandCountLimit = MaxSavedCommands; //MaxSavedCommands defined in DEFS.h by 5;
 
-	if (savedCommandCount < commandCountLimit)
-		savedCommands[savedCommandCount++] = cmd;
+	//if (savedCommandCount < commandCountLimit)
+	//	savedCommands[savedCommandCount++] = cmd;
+	//cout << "Player address: " << this << endl;
+	
+	if (savedCommandCount >= 5)
+		return;
+
+	savedCommands[savedCommandCount++] = cmd;
+
+	// remove from available list
+	for (int i = 0; i < availableCommandCount; i++)
+	{
+		if (availableCommands[i] == cmd)
+		{
+			availableCommands[i] = NO_COMMAND;
+			break;
+		}
+	}
+
 }
 
 void Player::ClearSavedCommands()
@@ -58,7 +81,7 @@ void Player::ClearSavedCommands()
 }
 
 
-int     Player::GetSavedCommandCount() const { return savedCommandCount; }
+int Player::GetSavedCommandCount() const { return savedCommandCount; }
 
 
 Command Player::GetSavedCommand(int index) const
@@ -68,6 +91,17 @@ Command Player::GetSavedCommand(int index) const
 	return NO_COMMAND;
 }
 
+Command* Player::GetSavedCommands()
+{
+	return savedCommands;
+}
+
+
+
+Command* Player::GetAvailableCommands() 
+{
+	return availableCommands;
+}
 
 // ====== Drawing Functions ======
 
@@ -172,7 +206,7 @@ void Player::Move(Grid* pGrid, GameState* pState)
 				if (newPos.IsValidCell())
 				{
 					pGrid->UpdatePlayerCell(this, newPos);
-
+					pGrid->UpdateInterface(pState);
 					GameObject* obj = pCell->GetGameObject();
 					if (obj!= NULL && !pCell->HasWorkshop())
 						obj->Apply(pGrid, pState, this);
@@ -217,3 +251,40 @@ const int Player::getPlayerNum() const
 {
 	return playerNum;
 }
+
+void Player::GenerateRandomCommands()
+{
+	availableCommandCount = 8;
+
+	Command base[] = {
+		MOVE_FORWARD_ONE_STEP,
+		MOVE_BACKWARD_ONE_STEP,
+		MOVE_FORWARD_TWO_STEPS,
+		MOVE_BACKWARD_TWO_STEPS,
+		MOVE_FORWARD_THREE_STEPS,
+		MOVE_BACKWARD_THREE_STEPS,
+		ROTATE_CLOCKWISE,
+		ROTATE_COUNTERCLOCKWISE
+	};
+
+	for (int i = 0; i < 8; i++)
+		availableCommands[i] = base[i];
+
+	savedCommandCount = 0; // reset every round
+}
+
+int Player::GetAvailableCommandCount() const
+{
+	return availableCommandCount;
+}
+
+Command Player::GetAvailableCommand(int index) const
+{
+	if (index >= 0 && index < availableCommandCount)
+		return availableCommands[index];
+
+	return NO_COMMAND;
+}
+
+
+

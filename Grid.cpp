@@ -5,7 +5,7 @@
 #include "Belt.h"
 #include "Player.h"
 #include "GameState.h"
-
+#include<iostream>
 Grid::Grid(Input* pIn, Output* pOut) : pIn(pIn), pOut(pOut)
 {
 	// Allocate every Cell on the board (bottom-up so cell numbers are assigned correctly)
@@ -140,9 +140,14 @@ void Grid::UpdateInterface(const GameState* pState) const
 		string playersInfo = "";
 		pState->AppendPlayersInfo(playersInfo);
 		pOut->PrintPlayersInfo(playersInfo);
-		 
+		pOut->CreateCommandsBar(pState->GetCurrentPlayer()->GetSavedCommands(), pState->GetCurrentPlayer()->GetSavedCommandCount(),
+			pState->GetCurrentPlayer()->GetAvailableCommands(), pState->GetCurrentPlayer()->GetAvailableCommandCount());
+
 		// Note: UpdatePlayerCell() already redraws players step-by-step during Play mode.
+		Player*currPlayer = pState->GetCurrentPlayer();
+		//UpdatePlayerCell(currPlayer, );
 	}
+	
 }
 
 void Grid::PrintErrorMessage(string msg)

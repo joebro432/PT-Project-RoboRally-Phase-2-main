@@ -155,7 +155,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case EXIT_PLAY:
-		pAct = new SwitchToDesignModeAction(this);//it exists to design mode again tbh idk what to do if i js do break it doesnt do anything
 		break;
 
 	case SELECT_COMMAND:

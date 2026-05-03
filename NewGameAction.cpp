@@ -47,8 +47,13 @@ void NewGameAction::Execute()
 
 
     pManager->UpdateInterface();//redraw interface the ui
-
+    pOut->CreatePlayModeToolBar();
+    pOut->CreateCommandsBar(pState->GetCurrentPlayer()->GetSavedCommands(),
+        pState->GetCurrentPlayer()->GetSavedCommandCount(),
+        pState->GetCurrentPlayer()->GetAvailableCommands(),
+        pState->GetCurrentPlayer()->GetAvailableCommandCount());
     pGrid->PrintErrorMessage("New game has started");
+   
 }
 
 NewGameAction::~NewGameAction()
