@@ -37,7 +37,8 @@ void RotatingGear::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 
 
 	Input* pIn = pGrid->GetInput();
-	pIn->GetCellClicked();
+	int x, y;
+	pIn->GetPointClicked(x, y);
 
 
 	//2- Apply the roating gear's effect by rotating the player according to the direction
@@ -88,8 +89,13 @@ void RotatingGear::Save(ofstream& OutFile)
 		OutFile << "0 ";
 	}
 }
-void RotatingGear::Load(ifstream& Infile){
+void RotatingGear::Load(ifstream& Infile) {
 	int dir;
-	Infile >> dir;
-	isClockWise = (dir == 1);
+	int cellnum;
+	Infile >>cellnum>>dir;
+	if (dir == 1) {
+		isClockWise = true;
+	}
+	else { isClockWise = false; }
+	position = CellPosition(cellnum);
 }
