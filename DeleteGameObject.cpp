@@ -36,7 +36,7 @@ void DeleteGameObject::Execute()
     }
 
     // check if there is an object
-    GameObject* pObj = pGrid->GetCell(pos)->GetGameObject();
+    GameObject* pObj = pGrid->GetCell(pos)->GetGameObject();//get the object in the cell of the passed position
 
     if (pObj == nullptr)
     {

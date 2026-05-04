@@ -96,7 +96,7 @@ Antenna* Cell::HasAntenna() const
 void Cell::DrawCellOrWaterPitOrDangerZone(Output* pOut) const
 {
 	// Checks if there is a dangerzone or a waterpit on the cell
-	if (HasDangerZone()||HasWaterPit()) // means if not NULL
+	if (HasDangerZone()||HasWaterPit() && pGameObject != nullptr) // means if not NULL
 		pGameObject->Draw(pOut); // draw the dangerzone or waterpit  then
 	else
 		pOut->DrawCell(position,UI.CellColor); // draw empty cell 
