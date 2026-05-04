@@ -70,7 +70,7 @@ CellPosition Belt::GetEndPosition() const
 void Belt::Save(ofstream& OutFile)
 {
 	// Saves start cell and end cell
-	OutFile << position.GetCellNum() << " " << endCellPos.GetCellNum() << " ";
+	OutFile <<" BELT START CELL"<<" "<< position.GetCellNum() << " "<<"END CELL" << endCellPos.GetCellNum() << " ";
 }
 
 

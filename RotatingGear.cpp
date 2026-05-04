@@ -84,10 +84,10 @@ void RotatingGear::Save(ofstream& OutFile)
 	// Save cell number and direction (1 for clockwise, 0 for counter-clockwise)
 	OutFile << position.GetCellNum() << " ";
 	if (isClockWise == true) {
-		OutFile << "1 ";
+		OutFile <<"ROTATING GEAR" << " 1 ";
 	}
 	else {
-		OutFile << "0 ";
+		OutFile <<"ROTATING GEAR"<< " 0 ";
 	}
 }
 void RotatingGear::Load(ifstream& Infile) {

@@ -78,8 +78,8 @@ Antenna::~Antenna()
 
 
 void Antenna::Save(ofstream& OutFile) {
-	OutFile << "ANTENNA" << " " << position.GetCellNum() << endl
-		;//save el cell position bta3t el antenna 
+	OutFile << "ANTENNA" << " " << position.GetCellNum() << endl;
+		//save el cell position bta3t el antenna 
 }
 
 

@@ -42,7 +42,7 @@ Workshop::~Workshop()
 void Workshop::Save(ofstream& OutFile)
 {
 	// Save the cell number of the workshop
-	OutFile << position.GetCellNum() << " ";
+	OutFile <<"WORKSHOP" <<" "<< position.GetCellNum() << " ";
 }
 
 void Workshop::Load(ifstream& Infile)

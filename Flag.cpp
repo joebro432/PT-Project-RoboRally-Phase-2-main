@@ -42,7 +42,7 @@ Flag::~Flag()
 void Flag::Save(ofstream& OutFile)
 {
 	// Save the cell number of the flag
-	OutFile << position.GetCellNum() << " ";
+	OutFile <<"FLAG"<<" "<< position.GetCellNum() << " ";
 }
 
 void Flag::Load(ifstream& Infile)
