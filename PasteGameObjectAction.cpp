@@ -33,8 +33,11 @@ void PasteGameObjectAction::Execute()
 
     ReadActionParameters();// sees if there is cut or copy first
     GameObject* pClipboard = pGrid->GetClipboard();
-    if (!pClipboard)
+    if (!pClipboard) {
+        pGrid->PrintErrorMessage("Clipboard is empty sooo Nothing to paste.");
         return;
+    }
+       
 
     //CUT  move object
     if (pGrid->IsClipboardFromCut())
