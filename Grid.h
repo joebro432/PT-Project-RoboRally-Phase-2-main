@@ -74,7 +74,7 @@ public:
 	
 	///TODO: Add any additional board-query getters here (e.g. GetCell(CellPosition))
 	Cell* GetCell(const CellPosition& pos)const;
-
+	bool cellHasFlag(CellPosition pos) const; // checks if there is a flag in the cell of the passed position or not
 
 	bool GridHasFlag()const; // checks if there is a flag in the grid or not
 	bool GridHasAntenna()const; // checks if there is an antenna in the grid or not

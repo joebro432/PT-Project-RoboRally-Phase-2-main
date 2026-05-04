@@ -134,7 +134,13 @@ Cell* Grid::GetCell(const CellPosition& pos) const
 	return CellList[pos.VCell()][pos.HCell()];
 }
 
-
+bool Grid::cellHasFlag(CellPosition pos) const
+{
+	if (!pos.IsValidCell()) {
+		return false;
+	}
+	return CellList[pos.VCell()][pos.HCell()]->HasFlag() != nullptr;
+}
 // ========== User Interface ==========
 
 

@@ -59,6 +59,14 @@ void Belt::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 
 	// Clear status bar after move
 	pGrid->UpdateInterface(pState);
+	if (pGrid->cellHasFlag(endCellPos)) //checks if there is a flag in the cell of the end position or not
+	{
+		pGrid->GetOutput()->PrintMessage("You have reached a flag. Click to continue ...");
+		int x, y;
+		pGrid->GetInput()->GetPointClicked(x, y);
+		pGrid->GetFlag()->Apply(pGrid, pState, pPlayer); // Applies the flag's effect by ending the game
+		pGrid->UpdateInterface(pState);
+	}
 	pOut->ClearStatusBar();
 
 
