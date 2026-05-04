@@ -131,5 +131,5 @@ void GameState::AppendPlayersInfo(string& info) const
 		if (i < MaxPlayerCount - 1)
 			info += ", ";
 	}
-	info += " | Curr = " + to_string(currPlayerNumber);
+	info += " | Curr = " + to_string(currPlayerNumber+1);
 }

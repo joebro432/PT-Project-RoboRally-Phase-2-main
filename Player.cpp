@@ -3,6 +3,9 @@
 #include "GameObject.h"
 #include "GameState.h"
 #include <iostream>
+//#include<random> // used to generate random commands
+//#include <ctime>
+using namespace std;
 
 Player::Player(Cell* pCell, int playerNum)
 	: playerNum(playerNum), health(10), currDirection(RIGHT), savedCommandCount(0)
@@ -245,7 +248,8 @@ const int Player::getPlayerNum() const
 
 void Player::GenerateRandomCommands()
 {
-	availableCommandCount = 10;
+	availableCommandCount = health;
+	
 
 	Command base[] = {
 		MOVE_FORWARD_ONE_STEP,
@@ -259,9 +263,11 @@ void Player::GenerateRandomCommands()
 	};
 
 	for (int i = 0; i < 10; i++)
-		availableCommands[i] = base[i%8];
-
-	savedCommandCount = 0; // reset every round
+	{
+		int randomNumber = rand() % 8;	
+		availableCommands[i] = base[randomNumber];
+	}
+		savedCommandCount = 0; // reset every round
 }
 
 int Player::GetAvailableCommandCount() const

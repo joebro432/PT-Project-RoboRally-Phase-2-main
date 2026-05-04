@@ -51,6 +51,8 @@ void SelectCommandAction::Execute()
     GameState* pState = pManager->GetGameState();
     Output* pOut = pGrid->GetOutput();
 
+    
+
     if (!pState || !pGrid)
     {
         pGrid->PrintErrorMessage("Invalid command selection!");
@@ -76,12 +78,13 @@ void SelectCommandAction::Execute()
     }
     int maxCommands = min(5, currentplayer->GetHealth());
 
+
 	if (currentplayer->GetSavedCommandCount() >= maxCommands)
     {
         pGrid->PrintErrorMessage("You have reached the maximum number of commands for this round!");
         return;
     }
-
+    pOut->PrintMessage("Please Select a command!");
     currentplayer->AddSavedCommand(selectedCommand);//adds the command
 
    

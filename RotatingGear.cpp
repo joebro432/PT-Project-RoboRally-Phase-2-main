@@ -66,8 +66,9 @@ void RotatingGear::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 		default:    newDir = currentDir; break;
 		}
 	}
+	pPlayer->ClearDrawing(pOut);
 	pPlayer->SetDirection(newDir);
-
+	pPlayer->Draw(pOut);
 	pOut->ClearStatusBar();
 }
 bool RotatingGear::GetisClockWise() const
