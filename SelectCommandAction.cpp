@@ -72,12 +72,11 @@ void SelectCommandAction::Execute()
         return;
     }
 	if (selectedCommand == NO_COMMAND)
-    {
-        pGrid->PrintErrorMessage("Please click on a valid command!");
-        return;
-    }
-    int maxCommands = min(5, currentplayer->GetHealth());
-
+	{
+		pGrid->PrintErrorMessage("Please click on a valid command!");
+		return;
+	}
+	int maxCommands = currentplayer->GetMaxSavedCommandsForThisRound();
 
 	if (currentplayer->GetSavedCommandCount() >= maxCommands)
     {

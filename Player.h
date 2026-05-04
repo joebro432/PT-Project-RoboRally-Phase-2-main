@@ -20,6 +20,7 @@ class Player
 	// SelectCommandAction fills this array; Move() executes it; ClearSavedCommands() resets it.
 	Command savedCommands[MaxSavedCommands];
 	int savedCommandCount; // how many commands have been saved so far (0..MaxSavedCommands)
+	int maxSavedCommandsForThisRound; // Dynamic limit based on health and Extended Memory
 
 	Command availableCommands[10];
 	int availableCommandCount;
@@ -29,11 +30,18 @@ class Player
 	 
 	int laserDamage; // damage per shot (default = 1; double-laser consumable = 2)
 	bool isHacked;   // true = this player skips their turn this round
-
 	// ---- [OPTIONAL BONUS] Workshop Consumables data members ----
-	// Uncomment when adding consumables (see Workshop.h):
-	//   Consumable* inventory[MaxConsumables];
-	//   int inventoryCount;
+// Uncomment when adding consumables (see Workshop.h):
+//   Consumable* inventory[MaxConsumables];
+//   int inventoryCount;
+
+
+	// ---- Equipment and Consumables ----
+	Equipment equipment[MaxEquipment];//devices that can be carried
+	int equipmentCount;	//num of equipments
+
+	Consumable consumables[MaxConsumables];	// One-time use items
+	int consumableCount;// num of consumables
 
 public:
 
@@ -54,12 +62,38 @@ public:
 
 	///(DONE) TODO: Add more setters/getters here as needed
 	const int getPlayerNum() const;
+	// functions for the bonus 
+	// ====== Equipment and Consumables ======
+	void AddEquipment(Equipment equip);
+	bool HasEquipment(Equipment equip) const;
+	int GetEquipmentCount() const;
+
+	void AddConsumable(Consumable cons);
+	bool HasConsumable(Consumable cons) const;
+	Consumable GetConsumable(int index) const;
+	void RemoveConsumable(Consumable cons);
+	int GetConsumableCount() const;
+
+	bool HasExtendedMemory() const;
+	bool HasDoubleLaser() const;
+
+	// ====== Consumable Usage ======
+	bool UseToolkit(); // Repairs health by 3 (returns true if successful)
+	bool UseHackDevice(Player* targetPlayer); // Hacks target player's turn (returns true if successful)
+
+	// ====== Hack State ======
+	bool IsHacked() const { return isHacked; }
+	void SetIsHacked(bool hacked) { isHacked = hacked; }
+	void ResetIsHacked() { isHacked = false; } // Call at the start of each round
+
 	// ====== Saved Commands ======
 
 	void    AddSavedCommand(Command cmd);         // Appends cmd to savedCommands (called by SelectCommandAction)
 	void    ClearSavedCommands();                 // Resets the saved-command list (call at the start of each round)
 	int     GetSavedCommandCount() const;
 	int		GetMaxSavedCommands() const { return MaxSavedCommands; }
+	int		GetMaxSavedCommandsForThisRound() const; // Returns the dynamic limit (5 or 6 based on Extended Memory)
+	void    UpdateMaxSavedCommandsForThisRound(); // Call at the start of each planning phase to recalculate the limit
 	Command GetSavedCommand(int index) const;
 	Command* GetSavedCommands() ; 
 	Command* GetAvailableCommands() ;

@@ -79,6 +79,7 @@ public:
 	bool GridHasFlag()const; // checks if there is a flag in the grid or not
 	bool GridHasAntenna()const; // checks if there is an antenna in the grid or not
 	GameObject* GetAntenna() const; // Returns the antenna object if it exists, nullptr otherwise
+	GameObject* GetFlag() const; // Returns the flag object if it exists, nullptr otherwise
 	//DONE
 
 	// ========== User Interface ==========

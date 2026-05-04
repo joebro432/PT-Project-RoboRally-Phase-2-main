@@ -31,10 +31,13 @@ void SwitchToPlayModeAction::Execute()
 	// 4. Generate available commands for the current player
 	pState->GetCurrentPlayer()->GenerateRandomCommands();
 
-	// 5. Redraw the full interface (board + player info bar)
+	// 5. Initialize the current player's turn (update max saved commands, etc.)
+	pState->StartTurn();
+
+	// 6. Redraw the full interface (board + player info bar)
 	pManager->UpdateInterface();
 
-	// 6. Display the commands bar with saved and available commands
+	// 7. Display the commands bar with saved and available commands
 	pOut->CreateCommandsBar(pState->GetCurrentPlayer()->GetSavedCommands(),
 		pState->GetCurrentPlayer()->GetSavedCommandCount(),
 		pState->GetCurrentPlayer()->GetAvailableCommands(),

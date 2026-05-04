@@ -29,6 +29,7 @@ class GameState
 
 	PhaseType currentPhase; // Which phase of the current round we are in
 	bool endGame;           // True once a win/loss condition is detected
+	int moveCounter;        // Tracks how many players have completed their moves in this round
 
 public:
 
@@ -78,5 +79,12 @@ public:
 
 	void DrawAllPlayers(Output* pOut) const;          // Draw every player's token
 	void AppendPlayersInfo(string& info) const;       // Build the play-mode status string
-	void StartTurn();	
+	void StartTurn();	// Initialize a player's turn in planning phase
+	void ResetHackedStates(); // Reset hack flags for all players (call at start of new round)
+
+	// ========== Round Management ==========
+	void IncrementMoveCounter();  // Increment counter after a player moves
+	void ResetMoveCounter();      // Reset counter at start of new round
+	int GetMoveCounter() const;   // Get current move counter value
+	bool IsRoundComplete() const; // Returns true if all players have moved
 };

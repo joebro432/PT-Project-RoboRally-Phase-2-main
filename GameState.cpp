@@ -21,6 +21,7 @@ GameState::GameState(Grid* pGrid)
 	currPlayerNumber = 0;         // Player 0 goes first by default
 	currentPhase = PHASE_MOVEMENT;
 	endGame = false;
+	moveCounter = 0;              // Initialize move counter
 	PlayerList[currPlayerNumber]->GenerateRandomCommands();
 }
 
@@ -132,4 +133,41 @@ void GameState::AppendPlayersInfo(string& info) const
 			info += ", ";
 	}
 	info += " | Curr = " + to_string(currPlayerNumber+1);
+}
+
+void GameState::StartTurn()
+{
+	Player* currPlayer = GetCurrentPlayer();
+	if (currPlayer)
+	{
+		currPlayer->UpdateMaxSavedCommandsForThisRound();
+	}
+}
+
+void GameState::ResetHackedStates()
+{
+	for (int i = 0; i < MaxPlayerCount; i++)
+	{
+		PlayerList[i]->ResetIsHacked();
+	}
+}
+
+void GameState::IncrementMoveCounter()
+{
+	moveCounter++;
+}
+
+void GameState::ResetMoveCounter()
+{
+	moveCounter = 0;
+}
+
+int GameState::GetMoveCounter() const
+{
+	return moveCounter;
+}
+
+bool GameState::IsRoundComplete() const
+{
+	return moveCounter % MaxPlayerCount == 0;
 }

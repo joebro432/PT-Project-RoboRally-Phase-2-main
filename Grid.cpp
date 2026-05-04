@@ -263,3 +263,14 @@ GameObject* Grid::GetAntenna() const
 		}
 	return nullptr;
 }
+
+GameObject* Grid::GetFlag() const
+{
+	for (int i = 0; i < NumVerticalCells; i++)
+		for (int j = 0; j < NumHorizontalCells; j++)
+		{
+			if (CellList[i][j]->HasFlag())
+				return CellList[i][j]->GetGameObject();
+		}
+	return nullptr;
+}

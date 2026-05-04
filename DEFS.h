@@ -101,5 +101,23 @@ enum Command
 
 	COMMANDS_COUNT,
 };
+// for the bonus
+// Equipment and Consumables
+enum Equipment
+{
+	NO_EQUIPMENT,
+	EXTENDED_MEMORY, // 6 commands instead of 5 
+	DOUBLE_LASER,		// Deals 2 damage per shot (shooting phase)
+};
+
+enum Consumable
+{
+	NO_CONSUMABLE,
+	TOOLKIT, // one time
+	HACK_DEVICE,	// one time skips opps turn
+};
+
+const int MaxConsumables = 5;
+const int MaxEquipment = 3;
 
 #endif

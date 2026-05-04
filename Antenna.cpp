@@ -67,6 +67,10 @@ void Antenna::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 
 	pOut->PrintMessage("Player " + to_string(first->getPlayerNum() + 1) + " will play first! Click to continue...");
 	pGrid->GetInput()->GetPointClicked(x, y);
+
+	// Reset hack flags for the new round
+	pState->ResetHackedStates();
+
 	pGrid->UpdateInterface(pState);
 	pOut->ClearStatusBar();
 

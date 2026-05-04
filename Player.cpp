@@ -8,7 +8,7 @@
 using namespace std;
 
 Player::Player(Cell* pCell, int playerNum)
-	: playerNum(playerNum), health(10), currDirection(RIGHT), savedCommandCount(0)
+	: playerNum(playerNum), health(10), currDirection(RIGHT), savedCommandCount(0), maxSavedCommandsForThisRound(5)
 {
 	this->pCell = pCell;
 
@@ -23,6 +23,15 @@ Player::Player(Cell* pCell, int playerNum)
 
 	laserDamage = 1;
 	isHacked = false;
+
+	// Initialize equipment and consumables
+	for (int i = 0; i < MaxEquipment; i++)
+		equipment[i] = NO_EQUIPMENT;
+	equipmentCount = 0;
+
+	for (int i = 0; i < MaxConsumables; i++)
+		consumables[i] = NO_CONSUMABLE;
+	consumableCount = 0;
 }
 
 // ====== Setters and Getters ======
@@ -49,8 +58,8 @@ void      Player::SetDirection(Direction d) { currDirection = d; }
 
 void Player::AddSavedCommand(Command cmd)
 {
-	
-	if (savedCommandCount >= 5)
+
+	if (savedCommandCount >= maxSavedCommandsForThisRound)
 		return;
 
 	savedCommands[savedCommandCount++] = cmd;
@@ -285,6 +294,138 @@ Command Player::GetAvailableCommand(int index) const
 		return availableCommands[index];
 
 	return NO_COMMAND;
+}
+
+// ====== Equipment and Consumables ======
+
+void Player::AddEquipment(Equipment equip)
+{
+	if (equipmentCount < MaxEquipment && equip != NO_EQUIPMENT)
+	{
+		equipment[equipmentCount++] = equip;
+		// If extended memory, increase max saved commands
+		if (equip == EXTENDED_MEMORY)
+		{
+			// This requires modifying MaxSavedCommands or creating a dynamic limit
+			// For now, we'll just track that they have it
+		}
+		if (equip == DOUBLE_LASER)
+		{
+			laserDamage = 2;
+		}
+	}
+}
+
+bool Player::HasEquipment(Equipment equip) const
+{
+	for (int i = 0; i < equipmentCount; i++)
+	{
+		if (equipment[i] == equip)
+			return true;
+	}
+	return false;
+}
+
+int Player::GetEquipmentCount() const
+{
+	return equipmentCount;
+}
+
+bool Player::HasExtendedMemory() const
+{
+	return HasEquipment(EXTENDED_MEMORY);
+}
+
+bool Player::HasDoubleLaser() const
+{
+	return HasEquipment(DOUBLE_LASER);
+}
+
+void Player::AddConsumable(Consumable cons)
+{
+	if (consumableCount < MaxConsumables && cons != NO_CONSUMABLE)
+	{
+		consumables[consumableCount++] = cons;
+	}
+}
+
+bool Player::HasConsumable(Consumable cons) const
+{
+	for (int i = 0; i < consumableCount; i++)
+	{
+		if (consumables[i] == cons)
+			return true;
+	}
+	return false;
+}
+
+Consumable Player::GetConsumable(int index) const
+{
+	if (index >= 0 && index < consumableCount)
+		return consumables[index];
+	return NO_CONSUMABLE;
+}
+
+void Player::RemoveConsumable(Consumable cons)
+{
+	for (int i = 0; i < consumableCount; i++)
+	{
+		if (consumables[i] == cons)
+		{
+			// Shift remaining consumables down
+			for (int j = i; j < consumableCount - 1; j++)
+			{
+				consumables[j] = consumables[j + 1];
+			}
+			consumables[consumableCount - 1] = NO_CONSUMABLE;
+			consumableCount--;
+			break;
+		}
+	}
+}
+
+int Player::GetConsumableCount() const
+{
+	return consumableCount;
+}
+
+int Player::GetMaxSavedCommandsForThisRound() const
+{
+	// Base is min(5, health), but Extended Memory allows 6
+	int baseLimit = min(5, health);
+	if (HasExtendedMemory())
+		baseLimit = min(6, health);
+	return baseLimit;
+}
+
+void Player::UpdateMaxSavedCommandsForThisRound()
+{
+	maxSavedCommandsForThisRound = GetMaxSavedCommandsForThisRound();
+}
+
+bool Player::UseToolkit()
+{
+	if (!HasConsumable(TOOLKIT))
+		return false;
+
+	// Repair health by 3
+	int newHealth = health + 3;
+	if (newHealth > 10)
+		newHealth = 10;
+	SetHealth(newHealth);
+	RemoveConsumable(TOOLKIT);
+	return true;
+}
+
+bool Player::UseHackDevice(Player* targetPlayer)
+{
+	if (!HasConsumable(HACK_DEVICE) || !targetPlayer)
+		return false;
+
+	// Mark the target player as hacked (will skip their turn)
+	targetPlayer->isHacked = true;
+	RemoveConsumable(HACK_DEVICE);
+	return true;
 }
 
 
