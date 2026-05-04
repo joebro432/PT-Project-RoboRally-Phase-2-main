@@ -32,6 +32,8 @@ void Flag::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 
 	pGrid->GetInput()->GetPointClicked(x, y);
 	pState->SetEndGame(true);
+	pGrid->UpdateInterface(pState);
+	pGrid->GetOutput()->ClearStatusBar();
    
 }
 

@@ -33,8 +33,6 @@ void WaterPit::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 	//nb3to b2a ll bdaya 
 	pGrid->UpdatePlayerCell(pPlayer, pGrid->GetStartCell()->GetCellPosition());
 
-	Draw(pGrid->GetOutput());// to reset waterpit cell
-
 	// 3- Update the players info which is displayed (check Grid class and decide which function to use)
 	pGrid->UpdateInterface(pState);
 

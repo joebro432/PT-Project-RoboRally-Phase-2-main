@@ -139,9 +139,10 @@ void Player::Move(Grid* pGrid, GameState* pState)
 	{
 		Command cmd = savedCommands[i];
 
-        // rotations 
+		// rotations 
 		if (cmd == ROTATE_CLOCKWISE)
 		{
+			ClearDrawing(pGrid->GetOutput());
 			switch (currDirection)
 			{
 			case UP:    currDirection = RIGHT; break;
@@ -149,9 +150,11 @@ void Player::Move(Grid* pGrid, GameState* pState)
 			case DOWN:  currDirection = LEFT;  break;
 			case LEFT:  currDirection = UP;    break;
 			}
+			Draw(pGrid->GetOutput());
 		}
 		else if (cmd == ROTATE_COUNTERCLOCKWISE)
 		{
+			ClearDrawing(pGrid->GetOutput());
 			switch (currDirection)
 			{
 			case UP:    currDirection = LEFT;  break;
@@ -159,6 +162,7 @@ void Player::Move(Grid* pGrid, GameState* pState)
 			case DOWN:  currDirection = RIGHT; break;
 			case RIGHT: currDirection = UP;    break;
 			}
+			Draw(pGrid->GetOutput());
 		}
 		else if (cmd == NO_COMMAND) continue;
 		else
