@@ -53,7 +53,7 @@ void AddFlagAction::Execute()
 	Grid* pGrid = pManager->GetGrid();
 	if(pGrid->GridHasFlag()) //checks if there is already a flag in the grid or not
 	{
-		pGrid->PrintErrorMessage("Error: There is already a flag in the grid! Click to continue ...");
+		pGrid->PrintErrorMessage("Error: There is already a flag in the grid! Maximum 1 is allowed! Click to continue ...");
 		return;
 	}
 
