@@ -3,6 +3,14 @@
 #include "Output.h"
 #include "Input.h"
 #include "ApplicationManager.h"
+#include <fstream>
+#include "Belt.h"
+#include "Flag.h"
+#include "WaterPit.h"
+#include "DangerZone.h"
+#include "Workshop.h"
+#include "Antenna.h"
+#include "RotatingGear.h"
 //again same idea just different execution mmmm
 PasteGameObjectAction::PasteGameObjectAction(ApplicationManager* pApp) : Action(pApp)
 {
@@ -16,94 +24,122 @@ void PasteGameObjectAction::ReadActionParameters()
     pos = pIn->GetCellClicked();
     pOut->ClearStatusBar();
 }
-//
-//void PasteGameObjectAction::Execute()
-//{
-//    Grid* pGrid = pManager->GetGrid();
-//    ReadActionParameters();// sees if there is cut or copy first
-//
-//    //getting location of da cell
-//    GameObject* pObject = pGrid->GetClipboard();
-//    if (pObject)
-//    {
-//
-//        if (!pos.IsValidCell())//checking if its out of bounce 
-//        {
-//            pGrid->PrintErrorMessage("Invalid cell position. Try again.");
-//        }
-//        else
-//        {
-//            pObject->SetPosition(pos);//setting the position of the object
-//        }
-//        if (pGrid->AddObjectToCell(pObject))//adding the object
-//        {
-//            // if cut pastes one time
-//            if (pGrid->IsClipboardFromCut())
-//            {
-//                pGrid->ClearClipboard();
-//            }
-//        }
-//        else
-//        {
-//            // cell already has an object
-//            pGrid->PrintErrorMessage("there is already an object here");
-//        }
-//    }
-//    else
-//    {
-//
-//        pGrid->PrintErrorMessage("Clipboard is empty sooo Nothing to paste.");
-//    }
-//
-//    pManager->UpdateInterface();
-//}
+
+
 
 void PasteGameObjectAction::Execute()
 {
     Grid* pGrid = pManager->GetGrid();
-    ReadActionParameters();
 
-    GameObject* pObject = pGrid->GetClipboard();
-    if (pObject)
+    ReadActionParameters();// sees if there is cut or copy first
+    GameObject* pClipboard = pGrid->GetClipboard();
+    if (!pClipboard)
+        return;
+
+    //CUT  move object
+    if (pGrid->IsClipboardFromCut())
     {
-        if (!pos.IsValidCell())
-        {
-            pGrid->PrintErrorMessage("Invalid cell position. Try again.");
-            pManager->UpdateInterface();
-            return;
-        }
-
-        // Check if destination cell has a water pit or other object
-        Cell* pDestCell = pGrid->GetCell(pos);
-        if (pDestCell && (pDestCell->HasWaterPit() || pDestCell->GetGameObject()))
-        {
-            pGrid->PrintErrorMessage("Cannot paste on a cell with an object");
-            pManager->UpdateInterface();
-            return;
-        }
-
-        // Set position and add to cell
-        pObject->SetPosition(pos);
-
-        if (pGrid->AddObjectToCell(pObject))
-        {
-            if (pGrid->IsClipboardFromCut())
-            {
-                pGrid->ClearClipboard();
-            }
-        }
-        else
-        {
-            pGrid->PrintErrorMessage("Cannot paste object here.");
-        }
+        pClipboard->SetPosition(pos);
+        pGrid->AddObjectToCell(pClipboard);
+        pGrid->ClearClipboard();
     }
     else
     {
-        pGrid->PrintErrorMessage("Clipboard is empty. Nothing to paste.");
-    }
 
-    pManager->UpdateInterface();
+
+        //  Save clipboard object temporarily
+        ofstream tempOut("temp.txt");
+        pClipboard->Save(tempOut);
+        tempOut.close();
+
+
+        ifstream tempIn("temp.txt");// Open the temporary file to read the saved data
+
+        GameObject* newObj = nullptr;
+
+
+        string type;
+        tempIn >> type;
+
+
+        // Create correct object
+        if (type == "BELT")
+        {
+            newObj = new Belt(CellPosition(1), CellPosition(1));
+        }
+        else if (type == "FLAG")
+        {
+            
+                pGrid->PrintErrorMessage("there is a flag already placed");
+            
+            
+        }
+        else if (type == "DANGERZONE")
+        {
+            newObj = new DangerZone(CellPosition(1));
+        }
+        else if (type == "WATERPIT")
+        {
+            newObj = new WaterPit(CellPosition(1));
+        }
+        else if (type == "WORKSHOP")
+        {
+            newObj = new Workshop(CellPosition(1));
+        }
+        else if (type == "ANTENNA")
+        {
+           
+            pGrid->PrintErrorMessage("there is an antenna already placed");
+        }
+        else if (type == "ROTATINGGEAR")
+        {
+            newObj = new RotatingGear(CellPosition(1), 0);
+        }
+
+        // load data into object
+        if (newObj)
+        {
+            newObj->Load(tempIn);
+            newObj->SetPosition(pos);
+            pGrid->AddObjectToCell(newObj);
+        }
+
+        tempIn.close();
+
+        if (newObj)
+        {
+            newObj->SetPosition(pos);
+            pGrid->AddObjectToCell(newObj);
+        }
+
+
+        pManager->UpdateInterface();
+
+        ReadActionParameters();
+
+        GameObject* pObject = pGrid->GetClipboard();
+        if (pObject)
+        {
+            if (!pos.IsValidCell())
+            {
+                pGrid->PrintErrorMessage("Invalid cell position. Try again.");
+                pManager->UpdateInterface();
+                return;
+            }
+
+            // Check if destination cell has a water pit or other object
+            Cell* pDestCell = pGrid->GetCell(pos);
+            if (pDestCell && (pDestCell->HasWaterPit() || pDestCell->GetGameObject()))
+            {
+                pGrid->PrintErrorMessage("Cannot paste on a cell with an object");
+                pManager->UpdateInterface();
+                return;
+            }
+        }
+
+    }
 }
+
 
 PasteGameObjectAction::~PasteGameObjectAction()
 {
