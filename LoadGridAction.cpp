@@ -31,7 +31,6 @@ void LoadGridAction::Execute()
     }
     Grid *pGrid= pManager->GetGrid(); // get the grid pointer from the application manager
     string type; // to store the type of the game object in each line of the file
-	pManager->GetGrid()->GetOutput()->PrintMessage("Loading grid from SavedGrid.txt..."); // print a message to the user indicating that the grid is being loaded
     while (Infile >> type) // read the file line by line
     {
         GameObject* pObj = nullptr;
