@@ -97,7 +97,11 @@ void ExecuteCommandsAction::Execute()
 
 	pState->SetCurrentPhase(PHASE_MOVEMENT); //to start moving
 
+	pGrid->GetOutput()->PrintMessage("Commands are being executed...");
 	currPlayer->Move(pGrid, pState); 
+	int x, y;
+	pGrid->GetInput()->GetPointClicked(x, y); // Wait for click before clearing message
+	pGrid->GetOutput()->ClearStatusBar();
 	pManager->UpdateInterface(); // update the interface after the player moves
 
 	// Increment move counter to track how many players have moved
@@ -146,7 +150,7 @@ void ExecuteCommandsAction::Execute()
 
 	pState->StartTurn(); // enters phase plan
 
-	pGrid->GetOutput()->PrintMessage("Commands are being executed...");
+
 }
 
 

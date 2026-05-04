@@ -34,7 +34,7 @@ void PasteGameObjectAction::Execute()
     ReadActionParameters();// sees if there is cut or copy first
     GameObject* pClipboard = pGrid->GetClipboard();
     if (!pClipboard) {
-        pGrid->PrintErrorMessage("Clipboard is empty sooo Nothing to paste.");
+        pGrid->PrintErrorMessage("Clipboard is empty! Nothing to paste.");
         return;
     }
        
@@ -73,7 +73,7 @@ void PasteGameObjectAction::Execute()
         else if (type == "FLAG")
         {
             
-                pGrid->PrintErrorMessage("there is a flag already placed");
+                pGrid->PrintErrorMessage("There is already a flag placed");
             
             
         }
@@ -92,7 +92,7 @@ void PasteGameObjectAction::Execute()
         else if (type == "ANTENNA")
         {
            
-            pGrid->PrintErrorMessage("there is an antenna already placed");
+            pGrid->PrintErrorMessage("There is already an antenna placed");
         }
         else if (type == "ROTATINGGEAR")
         {
