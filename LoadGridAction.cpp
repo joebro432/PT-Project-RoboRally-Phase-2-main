@@ -59,7 +59,7 @@ void LoadGridAction::Execute()
         {
             pObj = new Antenna(CellPosition(1));//same for antenna
         }
-        else if (type == "ROTATING GEAR")
+        else if (type == "ROTATINGGEAR")
         {
             pObj = new RotatingGear(CellPosition(1), 0);//same for rotatinggear
         }

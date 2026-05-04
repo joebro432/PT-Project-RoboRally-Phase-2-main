@@ -80,17 +80,21 @@ bool RotatingGear::GetisClockWise() const
 RotatingGear::~RotatingGear()
 {
 }
+
 void RotatingGear::Save(ofstream& OutFile)
 {
 	// Save cell number and direction (1 for clockwise, 0 for counter-clockwise)
-	OutFile << position.GetCellNum() << " ";
+	OutFile << "ROTATINGGEAR " << position.GetCellNum() << " ";
+
 	if (isClockWise == true) {
-		OutFile <<"ROTATING GEAR" << " 1 ";
+		OutFile << "1 " << endl;
 	}
 	else {
-		OutFile <<"ROTATING GEAR"<< " 0 ";
+		OutFile << "0 " << endl;
 	}
+
 }
+
 void RotatingGear::Load(ifstream& Infile) {
 	int dir;
 	int cellnum;

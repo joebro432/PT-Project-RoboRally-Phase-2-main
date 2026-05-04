@@ -1,4 +1,2 @@
-<<<<<<< Updated upstream
-=======
- BELT START CELL 24 END CELL29 
->>>>>>> Stashed changes
+FLAG 3 BELT 13 17
+ANTENNA 24

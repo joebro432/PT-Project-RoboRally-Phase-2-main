@@ -42,7 +42,7 @@ void WaterPit::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 }
 void WaterPit::Save(ofstream& OutFile)
 {
-	OutFile <<"WATER PIT"<<" "<< position.GetCellNum() << " ";
+	OutFile <<"WATERPIT"<<" "<< position.GetCellNum() << endl;
 }
 
 void WaterPit::Load(ifstream& Infile)
