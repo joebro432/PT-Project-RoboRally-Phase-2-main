@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Grid.h" //for move function in player
 #include "GameState.h" // for move function in player
+#include "Antenna.h"
 
 
 ExecuteCommandsAction::ExecuteCommandsAction(ApplicationManager* pApp):Action(pApp){}
@@ -18,11 +19,11 @@ void ExecuteCommandsAction::Execute()
 	ReadActionParameters();
 	Grid* pGrid = pManager->GetGrid();
 	GameState* pState = pManager->GetGameState();
-	
+
 	if (!pState || !pGrid) {
 		return;
 	}
-	
+
 	Player* currPlayer = pState->GetCurrentPlayer();
 
 	if (!currPlayer) {
@@ -44,7 +45,20 @@ void ExecuteCommandsAction::Execute()
 	currPlayer->Move(pGrid, pState); 
 	pManager->UpdateInterface(); // update the interface after the player moves
 
+	int nextPlayerNum = (pState->GetCurrentPlayer()->getPlayerNum() + 1) % MaxPlayerCount;
 	pState->AdvanceCurrentPlayer(); // goes to next player
+
+	// Check if we've completed a full round (all players have moved)
+	if (nextPlayerNum == 0 && pGrid->GridHasAntenna())
+	{
+		// Round is complete, apply antenna to determine next round's turn order
+		GameObject* pAntenna = pGrid->GetAntenna();
+		if (pAntenna)
+		{
+			pAntenna->Apply(pGrid, pState, nullptr);
+		}
+	}
+
 	pState->SetCurrentPhase(PHASE_PLANNING); // next player goes to planning phase again
 
 	pGrid->GetOutput()->PrintMessage("Commands are being executed...");

@@ -235,3 +235,14 @@ bool Grid::GridHasAntenna() const
 		}
 	return false;
 }
+
+GameObject* Grid::GetAntenna() const
+{
+	for (int i = 0; i < NumVerticalCells; i++)
+		for (int j = 0; j < NumHorizontalCells; j++)
+		{
+			if (CellList[i][j]->HasAntenna())
+				return CellList[i][j]->GetGameObject();
+		}
+	return nullptr;
+}
