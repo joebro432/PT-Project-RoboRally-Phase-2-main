@@ -3,8 +3,7 @@
 #include "GameObject.h"
 #include "GameState.h"
 #include <iostream>
-//#include<random> // used to generate random commands
-//#include <ctime>
+
 using namespace std;
 
 Player::Player(Cell* pCell, int playerNum)
