@@ -24,7 +24,11 @@ void AddAntennaAction::Execute()
     ReadActionParameters();
 
     Grid* pGrid = pManager->GetGrid();
-
+	if (pGrid->GridHasAntenna()) //checks if there is already an antenna in the grid or not
+    {
+        pGrid->PrintErrorMessage("Error: There is already an antenna in the grid! Maximum 1 is allowed! Click to continue ...");
+        return;
+    }
 
     Antenna* pAntenna = new Antenna(pos);//creates an antenna
 

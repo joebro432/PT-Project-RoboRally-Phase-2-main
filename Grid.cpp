@@ -225,3 +225,13 @@ bool Grid::GridHasFlag() const
 		}
 	return false;
 }
+bool Grid::GridHasAntenna() const
+{
+	for (int i = 0; i < NumVerticalCells; i++)
+		for (int j = 0; j < NumHorizontalCells; j++)
+		{
+			if (CellList[i][j]->HasAntenna())
+				return true;
+		}
+	return false;
+}
