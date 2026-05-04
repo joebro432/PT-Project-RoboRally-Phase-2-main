@@ -67,7 +67,8 @@ void Antenna::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 
 	pOut->PrintMessage("Player " + to_string(first->getPlayerNum() + 1) + " will play first! Click to continue...");
 	pGrid->GetInput()->GetPointClicked(x, y);
-	
+	pGrid->UpdateInterface(pState);
+	pOut->ClearStatusBar();
 
 }
 

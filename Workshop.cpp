@@ -22,7 +22,7 @@ void Workshop::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 	// [OPTIONAL BONUS] Consumables can be given to the player here
 
 	if (!pPlayer) return;
-	
+
 	pPlayer->SetHealth(pPlayer->GetHealth()+3); // Increase player's health by 3
 
 	Output* pOut = pGrid->GetOutput();
@@ -31,6 +31,7 @@ void Workshop::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 	Input* pIn = pGrid->GetInput();
 	int x, y;
 	pIn->GetPointClicked(x, y);
+	pGrid->UpdateInterface(pState);
 	pOut->ClearStatusBar();
 
 }

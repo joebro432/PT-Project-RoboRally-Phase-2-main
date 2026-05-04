@@ -69,6 +69,7 @@ void RotatingGear::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 	pPlayer->ClearDrawing(pOut);
 	pPlayer->SetDirection(newDir);
 	pPlayer->Draw(pOut);
+	pGrid->UpdateInterface(pState);
 	pOut->ClearStatusBar();
 }
 bool RotatingGear::GetisClockWise() const
