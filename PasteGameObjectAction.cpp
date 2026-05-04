@@ -46,7 +46,7 @@ void PasteGameObjectAction::Execute()
         else
         {
             // cell already has an object
-            pGrid->PrintErrorMessage("there is already a cell here");
+            pGrid->PrintErrorMessage("there is already an object here");
         }
     }
     else

@@ -34,32 +34,32 @@ void LoadGridAction::Execute()
     while (Infile >> type) // read the file line by line
     {
         GameObject* pObj = nullptr;
-        if (type == "Belt")
+        if (type == "BELT")
         {
             pObj = new Belt(CellPosition(1), CellPosition(1)); // create a temporary belt object to call the Load function and read the belt data from the file
         }
-        else if (type == "Flag")
+        else if (type == "FLAG")
         {
             pObj = new Flag(CellPosition(1));// create a temporary flag object to call the Load function and read the flag data from the file
         }
-        else if (type == "DangerZone")
+        else if (type == "DANGERZONE")
         {
             pObj = new DangerZone(CellPosition(1));//same for dangerzone
         }
-        else if (type == "WaterPit")
+        else if (type == "WATERPIT")
         {
             pObj = new WaterPit(CellPosition(1));//same for waterpit
         }
-        else if (type == "Workshop")
+        else if (type == "WORKSHOP")
         {
             CellPosition pos(1);
             pObj = new Workshop(pos); //same for workshop
         }
-        else if (type == "Antenna")
+        else if (type == "ANTENNA")
         {
             pObj = new Antenna(CellPosition(1));//same for antenna
         }
-        else if (type == "RotatingGear")
+        else if (type == "ROTATING GEAR")
         {
             pObj = new RotatingGear(CellPosition(1), 0);//same for rotatinggear
         }

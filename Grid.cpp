@@ -175,9 +175,18 @@ void Grid::UpdateInterface(const GameState* pState) const
 		pOut->CreateCommandsBar(pState->GetCurrentPlayer()->GetSavedCommands(), pState->GetCurrentPlayer()->GetSavedCommandCount(),
 			pState->GetCurrentPlayer()->GetAvailableCommands(), pState->GetCurrentPlayer()->GetAvailableCommandCount());
 
-		// Note: UpdatePlayerCell() already redraws players step-by-step during Play mode.
-		Player*currPlayer = pState->GetCurrentPlayer();
-		//UpdatePlayerCell(currPlayer, );
+		// 1- Draw every cell (background colour, water pits, danger zones)
+		for (int i = NumVerticalCells - 1; i >= 0; i--)
+			for (int j = 0; j < NumHorizontalCells; j++)
+				CellList[i][j]->DrawCellOrWaterPitOrDangerZone(pOut);
+
+		// 2- Draw other game objects on top (belts, flags, gears, etc.)
+		for (int i = NumVerticalCells - 1; i >= 0; i--)
+			for (int j = 0; j < NumHorizontalCells; j++)
+				CellList[i][j]->DrawGameObject(pOut);
+
+		// 3- Draw all player tokens (delegated to GameState -- Grid does not own players)
+		pState->DrawAllPlayers(pOut);
 	}
 	
 }

@@ -56,6 +56,11 @@ void AddFlagAction::Execute()
 		pGrid->PrintErrorMessage("Error: There is already a flag in the grid! Maximum 1 is allowed! Click to continue ...");
 		return;
 	}
+	//if(pGrid->GetCell(flagPos) == pGrid->)
+	//{
+	//	pGrid->PrintErrorMessage("Error: Cell already has an object ! Click to continue ...");
+	//	return;
+	//}
 
 	// 1-Create a flag object
 	Flag* pflag = new Flag(flagPos);
