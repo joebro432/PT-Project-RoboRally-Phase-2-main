@@ -21,7 +21,6 @@ Player::Player(Cell* pCell, int playerNum)
 	for (int i = 0; i < 10; i++)
 		availableCommands[i] = NO_COMMAND;
 
-	laserDamage = 1;
 	isHacked = false;
 
 	// Initialize equipment and consumables
@@ -138,11 +137,13 @@ void Player::ClearDrawing(Output* pOut) const
 void Player::Move(Grid* pGrid, GameState* pState)
 {
 	///(DONE) TODO: Implement this function
-	// - Execute the saved commands one by one, waiting for a mouse click between each
-	// - After all commands are executed, apply the game object effect at the final cell (if any)
-	// - Use CellPosition and Grid to handle movement and cell updates
+// - Execute the saved commands one by one, waiting for a mouse click between each
+// - After all commands are executed, apply the game object effect at the final cell (if any)
+// - Use CellPosition and Grid to handle movement and cell updates
 	if (savedCommandCount <= 0)
 		return;
+
+	GameObject* workshopVisited = nullptr;  // Track if player visited a workshop
 
 	for (int i = 0; i < savedCommandCount; i++)
 	{
@@ -215,12 +216,19 @@ void Player::Move(Grid* pGrid, GameState* pState)
 					pGrid->UpdatePlayerCell(this, newPos);
 					pGrid->UpdateInterface(pState);
 					GameObject* obj = pCell->GetGameObject();
-					if (obj!= NULL && !pCell->HasWorkshop())
+					if (obj != NULL && !pCell->HasWorkshop())
+					{
+						// Apply non-workshop effects immediately
 						obj->Apply(pGrid, pState, this);
+					}
+					else if (obj != NULL && pCell->HasWorkshop())
+					{
+						// Store workshop for later application
+						workshopVisited = obj;
+					}
 				}
 			}
 		}
-        
 
 		if (i < savedCommandCount - 1)
 		{
@@ -229,11 +237,18 @@ void Player::Move(Grid* pGrid, GameState* pState)
 		}
 	}
 
-	GameObject* finalObj = pCell->GetGameObject();
-
-	if (finalObj != NULL && pCell->HasWorkshop())
-		finalObj->Apply(pGrid, pState, this);
-
+	// Apply workshop effect after all commands are executed
+	if (workshopVisited != nullptr)
+	{
+		workshopVisited->Apply(pGrid, pState, this);
+	}
+	// If no workshop was visited but final cell has a workshop, apply it
+	else if (pCell->HasWorkshop())
+	{
+		GameObject* finalObj = pCell->GetGameObject();
+		if (finalObj != NULL)
+			finalObj->Apply(pGrid, pState, this);
+	}
 }
 
 void Player::AppendPlayerInfo(string& playersInfo) const
@@ -309,10 +324,6 @@ void Player::AddEquipment(Equipment equip)
 			// This requires modifying MaxSavedCommands or creating a dynamic limit
 			// For now, we'll just track that they have it
 		}
-		if (equip == DOUBLE_LASER)
-		{
-			laserDamage = 2;
-		}
 	}
 }
 
@@ -336,10 +347,7 @@ bool Player::HasExtendedMemory() const
 	return HasEquipment(EXTENDED_MEMORY);
 }
 
-bool Player::HasDoubleLaser() const
-{
-	return HasEquipment(DOUBLE_LASER);
-}
+
 
 void Player::AddConsumable(Consumable cons)
 {
@@ -423,9 +431,24 @@ bool Player::UseHackDevice(Player* targetPlayer)
 		return false;
 
 	// Mark the target player as hacked (will skip their turn)
-	targetPlayer->isHacked = true;
+	targetPlayer->SetIsHacked(true);
 	RemoveConsumable(HACK_DEVICE);
 	return true;
+}
+
+bool Player::IsHacked() const
+{
+	return isHacked;
+}
+
+void Player::SetIsHacked(bool hacked)
+{
+	isHacked = hacked;
+}
+
+void Player::ResetHackState()
+{
+	isHacked = false;
 }
 
 

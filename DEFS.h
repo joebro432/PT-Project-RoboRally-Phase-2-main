@@ -73,7 +73,7 @@ enum PhaseType
 //													SHOOTING for GameState				]
 
 	PHASE_PLANNING,   // players select commands to save for the next round
-	PHASE_SHOOTING,   // BONUS
+
 };
 
 enum Direction // Directions of the game
