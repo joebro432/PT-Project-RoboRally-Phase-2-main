@@ -1,5 +1,5 @@
 #include "Grid.h"
-
+#include <fstream>
 #include "Cell.h"
 #include "GameObject.h"
 #include "Belt.h"
@@ -29,6 +29,9 @@ bool Grid::AddObjectToCell(GameObject* pNewObject)
 	{
 		return false;
 	}
+	if (pNewObject == nullptr){
+		return false;
+}// invalid object pointer
 	
 		if (pos.GetCellNum() == 1 || pos.GetCellNum() == 55)
 		{
@@ -41,8 +44,8 @@ bool Grid::AddObjectToCell(GameObject* pNewObject)
 		}
 
 		
-			CellList[pos.VCell()][pos.HCell()]->SetGameObject(pNewObject);// add the new object to the cell
-			return true;
+			return CellList[pos.VCell()][pos.HCell()]->SetGameObject(pNewObject);// add the new object to the cell
+			
 	
 	
 	//FIXED
@@ -209,8 +212,13 @@ Grid::~Grid()
 
 	for (int i = NumVerticalCells - 1; i >= 0; i--)
 		for (int j = 0; j < NumHorizontalCells; j++)
-			delete CellList[i][j];
+		{
+			GameObject* pObj = CellList[i][j]->GetGameObject();
+			if (pObj)
+				delete pObj;
 
+			delete CellList[i][j];
+		}
 	// Players are owned by GameState -- do NOT delete them here.
 }
 
