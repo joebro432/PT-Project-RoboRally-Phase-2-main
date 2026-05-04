@@ -58,6 +58,7 @@ void Belt::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 	pGrid->UpdatePlayerCell(pPlayer, endCellPos);
 
 	// Clear status bar after move
+	pGrid->UpdateInterface(pState);
 	pOut->ClearStatusBar();
 
 
