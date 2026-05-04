@@ -21,6 +21,29 @@ void DeleteGameObject::Execute()
 {
 	Grid* pGrid = pManager->GetGrid(); //get the grid pointer to access its functions
 	ReadActionParameters(); //read the action parameters (the cell position of the object to delete)
+    // check valid cell
+    if (!pos.IsValidCell())
+    {
+        pGrid->PrintErrorMessage("Invalid cell!");
+        return;
+    }
+
+    // prevent deleting from start/end cells
+    if (pos.GetCellNum() == 1 || pos.GetCellNum() == 55)
+    {
+        pGrid->PrintErrorMessage("Cannot delete from this cell!");
+        return;
+    }
+
+    // check if there is an object
+    GameObject* pObj = pGrid->GetCell(pos)->GetGameObject();
+
+    if (pObj == nullptr)
+    {
+        pGrid->PrintErrorMessage("No object in this cell!");
+        return;
+    }
+
 	pGrid->RemoveObjectFromCell(pos); //remove the object from the cell of the passed position
 	pManager->UpdateInterface(); //update the interface so the deletion of the object appears on the grid
 }
