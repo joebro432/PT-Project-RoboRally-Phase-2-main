@@ -39,7 +39,7 @@ void ExecuteCommandsAction::Execute()
 	if (currPlayer->IsHacked())
 	{
 		pGrid->PrintErrorMessage("This player is hacked and must skip their turn!");
-		currPlayer->ResetIsHacked(); // Reset for next round
+		currPlayer->ResetHackState(); // Reset for next round
 		currPlayer->ClearSavedCommands(); // Clear any saved commands
 
 		// Increment move counter even though we're skipping

@@ -1,5 +1,4 @@
 #include "GameState.h"
-
 #include "Grid.h"
 #include "Player.h"
 #include "Cell.h"
@@ -85,18 +84,6 @@ void GameState::AdvancePhase()
 	// [UPDATED] update this to cycle:  MOVEMENT --> SHOOTING --> MOVEMENT 
 	switch (currentPhase)
 	{
-	case PHASE_MOVEMENT:
-	{
-		currentPhase = PHASE_SHOOTING; // To switch between the two game mode phases
-		break;
-	}
-
-	case PHASE_SHOOTING:
-	{
-		currentPhase = PHASE_MOVEMENT;
-		break;
-
-	}
 	default:
 		currentPhase = PHASE_MOVEMENT; // Default phase
 		break;
@@ -148,7 +135,7 @@ void GameState::ResetHackedStates()
 {
 	for (int i = 0; i < MaxPlayerCount; i++)
 	{
-		PlayerList[i]->ResetIsHacked();
+		PlayerList[i]->ResetHackState();
 	}
 }
 

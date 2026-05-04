@@ -25,16 +25,7 @@ class Player
 	Command availableCommands[10];
 	int availableCommandCount;
 
-	// ---- [OPTIONAL BONUS] Shooting Phase data members ----
-	// Uncomment when adding the shooting phase (see DEFS.h PhaseType):
-	 
-	int laserDamage; // damage per shot (default = 1; double-laser consumable = 2)
-	bool isHacked;   // true = this player skips their turn this round
-	// ---- [OPTIONAL BONUS] Workshop Consumables data members ----
-// Uncomment when adding consumables (see Workshop.h):
-//   Consumable* inventory[MaxConsumables];
-//   int inventoryCount;
-
+	bool isHacked;// true = this player skips their turn this round
 
 	// ---- Equipment and Consumables ----
 	Equipment equipment[MaxEquipment];//devices that can be carried
@@ -75,16 +66,15 @@ public:
 	int GetConsumableCount() const;
 
 	bool HasExtendedMemory() const;
-	bool HasDoubleLaser() const;
 
 	// ====== Consumable Usage ======
 	bool UseToolkit(); // Repairs health by 3 (returns true if successful)
 	bool UseHackDevice(Player* targetPlayer); // Hacks target player's turn (returns true if successful)
 
 	// ====== Hack State ======
-	bool IsHacked() const { return isHacked; }
-	void SetIsHacked(bool hacked) { isHacked = hacked; }
-	void ResetIsHacked() { isHacked = false; } // Call at the start of each round
+	bool IsHacked() const;
+	void SetIsHacked(bool hacked);
+	void ResetHackState(); // Call at the start of each round to clear hack status
 
 	// ====== Saved Commands ======
 

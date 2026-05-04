@@ -66,7 +66,7 @@ public:
 	void SetCurrentPhase(PhaseType phase);
 
 	// Advances to the next phase in the round.
-	// [OPTIONAL BONUS] To add PHASE_SHOOTING, update this function body: [ADDED]
+	// [OPTIONAL BONUS] To add PHASE_SHOOTING, update this function body:
 	//   MOVEMENT --> SHOOTING --> MOVEMENT
 	void AdvancePhase();
 
