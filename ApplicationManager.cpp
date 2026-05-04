@@ -161,8 +161,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new ExecuteCommandsAction(this);
 		break;
 
-	case EXIT_PLAY:
-		break;
 
 	case SELECT_COMMAND:
 		pAct = new SelectCommandAction(this);

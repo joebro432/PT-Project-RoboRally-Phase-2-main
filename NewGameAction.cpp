@@ -36,9 +36,13 @@ void NewGameAction::Execute()
     {
         Player* player = pState->GetPlayer(i);
         if (player)
-        {
+        {        
             player->ClearSavedCommands();
-            player->SetHealth(10);//Reset health 
+            player->SetHealth(10);//Reset health
+            player->ClearDrawing(pOut);
+            player->SetCell(pGrid->GetStartCell());
+            player->Draw(pOut);
+            
         }
     }
 

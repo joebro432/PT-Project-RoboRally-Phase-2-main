@@ -54,7 +54,7 @@ void LoadGridAction::Execute()
         else if (type == "Workshop")
         {
             CellPosition pos(1);
-        //    pObj = new Workshop(pos); //same for workshop
+            pObj = new Workshop(pos); //same for workshop
         }
         else if (type == "Antenna")
         {

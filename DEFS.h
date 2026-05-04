@@ -51,7 +51,7 @@ enum ActionType // The actions supported (add more as needed)
 
 	REBOOT_AND_REPAIR,		//restore some health points
 	NEW_GAME, 			//Restarts the game
-	EXIT_PLAY,
+
 
 	TO_DESIGN_MODE,	// Go to Design Mode
 

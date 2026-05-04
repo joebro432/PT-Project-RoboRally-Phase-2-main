@@ -136,7 +136,7 @@ ActionType Input::GetUserAction() const
 			case ITM_SWITCH_TO_DESIGN_MODE: return TO_DESIGN_MODE;
 			case ITM_Reboot_Repair: return REBOOT_AND_REPAIR;
 			case ITM_New_Game: return NEW_GAME;
-			case ITM_Exit: return EXIT_PLAY;
+			case ITM_Exit: return EXIT;
 			}
 
 		}

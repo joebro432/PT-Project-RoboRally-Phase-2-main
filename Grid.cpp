@@ -159,6 +159,16 @@ void Grid::UpdateInterface(const GameState* pState) const
 		string playersInfo = "";
 		pState->AppendPlayersInfo(playersInfo);
 		pOut->PrintPlayersInfo(playersInfo);
+		if (pState->GetEndGame() == true) {
+			pOut->PrintMessage("Click new Game...");
+			pOut->ClearCommandsBar();
+			return;
+		}
+		if (pState->GetCurrentPlayer()->GetHealth() == 0) {
+			pOut->PrintMessage("Player " + to_string(pState->GetCurrentPlayer()->getPlayerNum() + 1) + " wins! Click new game to start a new game!");
+			pOut->ClearCommandsBar();
+			return;
+		}
 		pOut->CreateCommandsBar(pState->GetCurrentPlayer()->GetSavedCommands(), pState->GetCurrentPlayer()->GetSavedCommandCount(),
 			pState->GetCurrentPlayer()->GetAvailableCommands(), pState->GetCurrentPlayer()->GetAvailableCommandCount());
 
