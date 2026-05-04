@@ -1,7 +1,6 @@
 #include "AddFlagAction.h"
 
 
-
 AddFlagAction::AddFlagAction(ApplicationManager *pApp) : Action(pApp)
 {
 	// Initializes the pManager pointer of Action with the passed pointer
@@ -37,6 +36,7 @@ void AddFlagAction::ReadActionParameters()
 			pGrid->PrintErrorMessage("Cannot place flag on 1 or 55 cell! Try again !");
 			valid = false;
 		}
+		
 	}
 	// 5- Clear status bar
 	pOut->ClearStatusBar();
@@ -56,11 +56,7 @@ void AddFlagAction::Execute()
 		pGrid->PrintErrorMessage("Error: There is already a flag in the grid! Maximum 1 is allowed! Click to continue ...");
 		return;
 	}
-	//if(pGrid->GetCell(flagPos) == pGrid->)
-	//{
-	//	pGrid->PrintErrorMessage("Error: Cell already has an object ! Click to continue ...");
-	//	return;
-	//}
+
 
 	// 1-Create a flag object
 	Flag* pflag = new Flag(flagPos);

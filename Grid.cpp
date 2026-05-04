@@ -42,7 +42,7 @@ bool Grid::AddObjectToCell(GameObject* pNewObject)
 		{
 			return false;
 		}
-
+		
 		
 			return CellList[pos.VCell()][pos.HCell()]->SetGameObject(pNewObject);// add the new object to the cell
 			

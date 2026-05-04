@@ -16,28 +16,77 @@ void PasteGameObjectAction::ReadActionParameters()
     pos = pIn->GetCellClicked();
     pOut->ClearStatusBar();
 }
+//
+//void PasteGameObjectAction::Execute()
+//{
+//    Grid* pGrid = pManager->GetGrid();
+//    ReadActionParameters();// sees if there is cut or copy first
+//
+//    //getting location of da cell
+//    GameObject* pObject = pGrid->GetClipboard();
+//    if (pObject)
+//    {
+//
+//        if (!pos.IsValidCell())//checking if its out of bounce 
+//        {
+//            pGrid->PrintErrorMessage("Invalid cell position. Try again.");
+//        }
+//        else
+//        {
+//            pObject->SetPosition(pos);//setting the position of the object
+//        }
+//        if (pGrid->AddObjectToCell(pObject))//adding the object
+//        {
+//            // if cut pastes one time
+//            if (pGrid->IsClipboardFromCut())
+//            {
+//                pGrid->ClearClipboard();
+//            }
+//        }
+//        else
+//        {
+//            // cell already has an object
+//            pGrid->PrintErrorMessage("there is already an object here");
+//        }
+//    }
+//    else
+//    {
+//
+//        pGrid->PrintErrorMessage("Clipboard is empty sooo Nothing to paste.");
+//    }
+//
+//    pManager->UpdateInterface();
+//}
 
 void PasteGameObjectAction::Execute()
 {
     Grid* pGrid = pManager->GetGrid();
-    ReadActionParameters();// sees if there is cut or copy first
+    ReadActionParameters();
 
-    //getting location of da cell
     GameObject* pObject = pGrid->GetClipboard();
     if (pObject)
     {
-
-        if (!pos.IsValidCell())//checking if its out of bounce 
+        if (!pos.IsValidCell())
         {
             pGrid->PrintErrorMessage("Invalid cell position. Try again.");
+            pManager->UpdateInterface();
+            return;
         }
-        else
+
+        // Check if destination cell has a water pit or other object
+        Cell* pDestCell = pGrid->GetCell(pos);
+        if (pDestCell && (pDestCell->HasWaterPit() || pDestCell->GetGameObject()))
         {
-            pObject->SetPosition(pos);//setting the position of the object
+            pGrid->PrintErrorMessage("Cannot paste on a cell with an object");
+            pManager->UpdateInterface();
+            return;
         }
-        if (pGrid->AddObjectToCell(pObject))//adding the object
+
+        // Set position and add to cell
+        pObject->SetPosition(pos);
+
+        if (pGrid->AddObjectToCell(pObject))
         {
-            // if cut pastes one time
             if (pGrid->IsClipboardFromCut())
             {
                 pGrid->ClearClipboard();
@@ -45,14 +94,12 @@ void PasteGameObjectAction::Execute()
         }
         else
         {
-            // cell already has an object
-            pGrid->PrintErrorMessage("there is already an object here");
+            pGrid->PrintErrorMessage("Cannot paste object here.");
         }
     }
     else
     {
-
-        pGrid->PrintErrorMessage("Clipboard is empty sooo Nothing to paste.");
+        pGrid->PrintErrorMessage("Clipboard is empty. Nothing to paste.");
     }
 
     pManager->UpdateInterface();
