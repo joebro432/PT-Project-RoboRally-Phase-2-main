@@ -18,7 +18,6 @@ LoadGridAction::LoadGridAction(ApplicationManager* pApp)
 
 void LoadGridAction::ReadActionParameters()
 {
-  //no parameters to read  
 }
 
 void LoadGridAction::Execute()

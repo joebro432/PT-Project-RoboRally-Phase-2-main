@@ -9,7 +9,9 @@ SaveGridAction::SaveGridAction(ApplicationManager* pApp): Action(pApp)
 
 void SaveGridAction::ReadActionParameters()
 {
-	
+	Output* pOut = pManager->GetGrid()->GetOutput(); //output pointer displaying message
+	Input* pIn = pManager->GetGrid()->GetInput();  //input pointer to get the cell clicked
+	pOut->PrintMessage("Objects saved !");
 }
 
 void SaveGridAction::Execute()
