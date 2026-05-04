@@ -15,37 +15,43 @@ void SelectCommandAction::ReadActionParameters()
     Grid* pGrid = pManager->GetGrid();
     Input* pIn = pGrid->GetInput();
 
-    int commandcounter = pIn->GetSelectedCommandIndex();
+    int x, y;
+    pIn->GetPointClicked(x, y);
 
-  // we could use cast or enum but forbidden so logically copy paste avaliable commands
-    Command availableCommands[] = {
-        MOVE_FORWARD_ONE_STEP,
-        MOVE_BACKWARD_ONE_STEP,
-        MOVE_FORWARD_TWO_STEPS,
-        MOVE_BACKWARD_TWO_STEPS,
-        MOVE_FORWARD_THREE_STEPS,
-        MOVE_BACKWARD_THREE_STEPS,
-        ROTATE_CLOCKWISE,
-        ROTATE_COUNTERCLOCKWISE
-    };
+    Player* pPlayer = pManager->GetGameState()->GetCurrentPlayer();
 
-    if (commandcounter >= 0 && commandcounter < 8)// 8 commands
-    {
-        selectedCommand = availableCommands[commandcounter];
-    }
-    else
+    // Calculate slot index based on available commands position and size
+    // Available commands are drawn starting at AvailableCommandsXOffset with width = CommandItemWidth/2
+    int availableCommandWidth = UI.CommandItemWidth / 2;
+
+    // Check if click is within the available commands area horizontally
+    if (x < UI.AvailableCommandsXOffset)
     {
         selectedCommand = NO_COMMAND;
+        return;
     }
+
+    // Calculate which slot was clicked
+    int relativeX = x - UI.AvailableCommandsXOffset;
+    int slotIndex = relativeX / availableCommandWidth;
+
+    // Validate slot index
+    if (slotIndex < 0 || slotIndex >= pPlayer->GetAvailableCommandCount())
+    {
+        selectedCommand = NO_COMMAND;
+        return;
+    }
+
+    selectedCommand = pPlayer->GetAvailableCommands()[slotIndex];
 }
-// same idea of any action
+
 void SelectCommandAction::Execute()
 {
     Grid* pGrid = pManager->GetGrid();
     GameState* pState = pManager->GetGameState();
     Output* pOut = pGrid->GetOutput();
 
-    if (!pState || !pGrid || selectedCommand == NO_COMMAND)
+    if (!pState || !pGrid)
     {
         pGrid->PrintErrorMessage("Invalid command selection!");
         return;
@@ -57,14 +63,25 @@ void SelectCommandAction::Execute()
         pGrid->PrintErrorMessage("Commands can only be selected during the Planning phase");
         return;
     }
-
+    ReadActionParameters();
     Player* currentplayer = pState->GetCurrentPlayer();
     if (!currentplayer)
     {
         return;
     }
+	if (selectedCommand == NO_COMMAND)
+    {
+        pGrid->PrintErrorMessage("Please click on a valid command!");
+        return;
+    }
+    int maxCommands = min(5, currentplayer->GetHealth());
 
-    
+	if (currentplayer->GetSavedCommandCount() >= maxCommands)
+    {
+        pGrid->PrintErrorMessage("You have reached the maximum number of commands for this round!");
+        return;
+    }
+
     currentplayer->AddSavedCommand(selectedCommand);//adds the command
 
    

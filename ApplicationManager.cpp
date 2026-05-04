@@ -98,7 +98,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case TO_PLAY_MODE:
-		pAct = new SwitchToPlayModeAction(this);
+		if (pGrid->GridHasFlag())
+		{
+			pAct = new SwitchToPlayModeAction(this);
+		}
+		else
+		{
+			pOut->PrintMessage("Error need flag to start game");
+		}
 		break;
 
 	case ADD_DANGER_ZONE:
@@ -155,7 +162,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case EXIT_PLAY:
-		pAct = new SwitchToDesignModeAction(this);//it exists to design mode again tbh idk what to do if i js do break it doesnt do anything
 		break;
 
 	case SELECT_COMMAND:

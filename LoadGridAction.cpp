@@ -34,59 +34,42 @@ void LoadGridAction::Execute()
     string type; // to store the type of the game object in each line of the file
     while (Infile >> type) // read the file line by line
     {
-        if (type == "Belt") // if the line indicates a belt obj
+        GameObject* pObj = nullptr;
+        if (type == "Belt")
         {
-            int startCell, endCell;
-            Infile >> startCell >> endCell; // read the belt's start and end cell
-            Belt *pBelt = new Belt(CellPosition(startCell), CellPosition(endCell)); // create a new belt object with the read data
-            pGrid->AddObjectToCell(pBelt); // add the belt to the grid
-
+            pObj = new Belt(CellPosition(1), CellPosition(1)); // create a temporary belt object to call the Load function and read the belt data from the file
         }
-        else if (type == "Flag")// if the line indicates flag obj
+        else if (type == "Flag")
         {
-            int cellNum;
-            Infile >> cellNum;// read the flag's cell number
-            Flag *pFlag = new Flag(CellPosition(cellNum)); // create a new flag object with the read data
-            pGrid->AddObjectToCell(pFlag); // add the flag to the grid
+            pObj = new Flag(CellPosition(1));// create a temporary flag object to call the Load function and read the flag data from the file
         }
-        else if (type == "DangerZone")//indicating if the obj is dangerzone
+        else if (type == "DangerZone")
         {
-            int cellNum;
-            Infile >> cellNum;// read the dangerzone's cell number
-            DangerZone* pDangerZone = new DangerZone(CellPosition(cellNum)); // create a new dangerzone object with the read data
-            pGrid->AddObjectToCell(pDangerZone); // add the dangerzone to the grid
-
+            pObj = new DangerZone(CellPosition(1));//same for dangerzone
         }
         else if (type == "WaterPit")
         {
-            int cellNum;
-            Infile >> cellNum;// read the waterpit's cell number
-            WaterPit* pWaterPit = new WaterPit(CellPosition(cellNum)); // create a new waterpit object with the read data
-            pGrid->AddObjectToCell(pWaterPit); // add the waterpit to the grid
-
+            pObj = new WaterPit(CellPosition(1));//same for waterpit
         }
         else if (type == "Workshop")
         {
-            int cellNum;
-            Infile >> cellNum;// read the workshop's cell number
-          //  Workshop* pWork = new Workshop(CellPosition(cellNum));
-           // pGrid->AddObjectToCell(pWork); // add the workshop to the grid
+            CellPosition pos(1);
+        //    pObj = new Workshop(pos); //same for workshop
         }
-        else if (type == "Antenna") 
+        else if (type == "Antenna")
         {
-            int cellNum;
-            Infile >> cellNum;
-            Antenna* pAnt = new Antenna(CellPosition(cellNum));
-                        pGrid->AddObjectToCell(pAnt);
-
+            pObj = new Antenna(CellPosition(1));//same for antenna
         }
         else if (type == "RotatingGear")
         {
-            int cellNum, rotationDir;
-            Infile >> cellNum >> rotationDir;
-            RotatingGear* pGear = new RotatingGear(CellPosition(cellNum), rotationDir);
-            pGrid->AddObjectToCell(pGear);
+            pObj = new RotatingGear(CellPosition(1), 0);//same for rotatinggear
         }
+        if (pObj != nullptr)
+        {
+            pObj->Load(Infile);               // object reads its own data
+            pGrid->AddObjectToCell(pObj);     // then added to grid
+        }
+    
     }
     Infile.close(); // close the file after loading
          pManager->UpdateInterface(); // update the interface to show the loaded grid

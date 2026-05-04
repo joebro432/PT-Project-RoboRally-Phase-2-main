@@ -15,6 +15,7 @@ void ExecuteCommandsAction::ReadActionParameters()
 
 void ExecuteCommandsAction::Execute()
 {
+	ReadActionParameters();
 	Grid* pGrid = pManager->GetGrid();
 	GameState* pState = pManager->GetGameState();
 	
@@ -28,12 +29,25 @@ void ExecuteCommandsAction::Execute()
 		return;
 	}
 
-	if (pState->GetCurrentPhase() != PHASE_MOVEMENT) {
-		pGrid->PrintErrorMessage("Cannot execute commands outside of the Movement phase!");
+	if (pState->GetCurrentPhase() != PHASE_PLANNING) {	// making sure that player was in plan phase
+		pGrid->PrintErrorMessage("You must be in planning phase!");
 		return;
 	}
 
+	if (currPlayer->GetSavedCommandCount() == 0) {
+		pGrid->PrintErrorMessage("No commands to execute!");
+		return;
+	}
+
+	pState->SetCurrentPhase(PHASE_MOVEMENT); //to start moving
+
 	currPlayer->Move(pGrid, pState); 
+	pManager->UpdateInterface(); // update the interface after the player moves
+
+	pState->AdvanceCurrentPlayer(); // goes to next player
+	pState->SetCurrentPhase(PHASE_PLANNING); // next player goes to planning phase again
+
+	pGrid->GetOutput()->PrintMessage("Commands are being executed...");
 }
 
 

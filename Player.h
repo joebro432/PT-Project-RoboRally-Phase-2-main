@@ -21,6 +21,9 @@ class Player
 	Command savedCommands[MaxSavedCommands];
 	int savedCommandCount; // how many commands have been saved so far (0..MaxSavedCommands)
 
+	Command availableCommands[10];
+	int availableCommandCount;
+
 	// ---- [OPTIONAL BONUS] Shooting Phase data members ----
 	// Uncomment when adding the shooting phase (see DEFS.h PhaseType):
 	 
@@ -56,8 +59,11 @@ public:
 	void    AddSavedCommand(Command cmd);         // Appends cmd to savedCommands (called by SelectCommandAction)
 	void    ClearSavedCommands();                 // Resets the saved-command list (call at the start of each round)
 	int     GetSavedCommandCount() const;
+	int		GetMaxSavedCommands() const { return MaxSavedCommands; }
 	Command GetSavedCommand(int index) const;
-
+	Command* GetSavedCommands() ; 
+	Command* GetAvailableCommands() ;
+	Command GetAvailableCommand(int index) const;
 	// ====== Drawing ======
 
 	void Draw(Output* pOut) const;         // Draws the player token on its current cell
@@ -68,4 +74,8 @@ public:
 	void Move(Grid* pGrid, GameState* pState);
 
 	void AppendPlayerInfo(string& playersInfo) const; // Appends "P0(direction, health)" to the string
+	
+	void GenerateRandomCommands();
+
+	int GetAvailableCommandCount() const;
 };
