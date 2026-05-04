@@ -30,7 +30,7 @@ void Workshop::Apply(Grid* pGrid, GameState* pState, Player* pPlayer)
 
 	// 1. Repair the robot - increase health by 3
 	pPlayer->SetHealth(pPlayer->GetHealth() + 3);
-	pOut->PrintMessage("Welcome to the workshop! Your robot has been repaired (+3 health). Click to continue...");
+	pOut->PrintMessage("You have reached a workshop, your health will increase! Click to continue...");
 	int x, y;
 	pIn->GetPointClicked(x, y);
 

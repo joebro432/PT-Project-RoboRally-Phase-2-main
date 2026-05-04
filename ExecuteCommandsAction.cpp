@@ -144,7 +144,7 @@ void ExecuteCommandsAction::Execute()
 		}
 	}
 
-	pState->StartTurn(); // Initialize the next player's turn (update max saved commands, etc.)
+	pState->StartTurn(); // enters phase plan
 
 	pGrid->GetOutput()->PrintMessage("Commands are being executed...");
 }
