@@ -19,6 +19,7 @@ void SaveGridAction::Execute()
 	if (Outfile.is_open()) // check if the file is open
 	{
 		pManager->GetGrid()->SaveAll(Outfile); // call the grid's SaveAll function to save the grid data to the file
+	pManager->GetGrid()->GetOutput()->PrintMessage("Saving grid to SavedGrid.txt..."); // print a message to the user indicating that the grid is being saved
 		Outfile.close(); // close the file after saving
 	}
 	else
