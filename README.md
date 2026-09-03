@@ -40,10 +40,10 @@ game objects.
 
 ## 👥 Team
 
-Nour Aldien Ahmed Youssef
-Youssef Hossam
-Judy Ahmed
-Alya Ahmed
+- Nour Aldien Ahmed Youssef
+- Youssef Hossam
+- Judy Ahmed
+- Alya Ahmed
 
 ## 📚 Academic Context
 
